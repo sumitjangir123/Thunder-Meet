@@ -1,0 +1,29 @@
+@import "https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap";
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+body {
+	&::-webkit-scrollbar {
+		width: 0.8em;
+	}
+	&::-webkit-scrollbar-track {
+		box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: #683aa4;
+		outline: 1px solid slategrey;
+	}
+	margin: 0px;
+	min-height: 100vh;
+	width: 100%;
+}
+html {
+	margin: 0px;
+	min-height: 100%;
+	width: 100%;
+}

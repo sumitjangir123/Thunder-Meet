@@ -1,0 +1,73 @@
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <p style="text-align: center;">register your institute</p>
+
+
+
+    <!-- Default form contact -->
+<form class="text-center border border-light p-5" method="POST" action="/organizations/instituteDetails">
+
+    <p class="h4 mb-4">Contact us</p>
+
+
+    <!-- Email -->
+    <input type="email" class="form-control mb-4" name="admin" placeholder="Your Email address" required>
+
+    <!-- Name -->
+    <input type="text" class="form-control mb-4" name="name" placeholder="Name of institute" required>
+
+    <!-- organization -->
+    <input type="text" class="form-control mb-4" name="organization" placeholder="organization eg. iiitkota.ac.in" required>
+
+    <!-- Acronym -->
+    <input type="text" class="form-control mb-4" name="acronym" placeholder="Acronym eg. iiitk" required>
+
+    <!-- Motto -->
+    <input type="text" class="form-control mb-4" placeholder="Motto" name="motto" required>
+
+    <!-- address -->
+    <div class="form-group">
+        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="ADDRESS" name="address" required></textarea>
+    </div>
+
+
+
+  <!-- branches -->
+  <!-- <label>Branches</label>
+    <div class="custom-control custom-checkbox mb-4">
+        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy1" name="cse">
+        <label class="custom-control-label" for="defaultContactFormCopy1">CSE</label>
+    </div>
+
+    <div class="custom-control custom-checkbox mb-4">
+        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy2" name="mech">
+        <label class="custom-control-label" for="defaultContactFormCopy2">MECH</label>
+    </div>
+
+    <div class="custom-control custom-checkbox mb-4">
+        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy3" name="civil">
+        <label class="custom-control-label" for="defaultContactFormCopy3">CIVIL</label>
+    </div>
+
+    <div class="custom-control custom-checkbox mb-4">
+        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy4" name="chemical">
+        <label class="custom-control-label" for="defaultContactFormCopy4">CHEMICAL</label>
+    </div>
+
+    <div class="custom-control custom-checkbox mb-4">
+        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy5" name="ece">
+        <label class="custom-control-label" for="defaultContactFormCopy5">ECE</label>
+    </div>
+
+    <div class="custom-control custom-checkbox mb-4">
+        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy6" name="other">
+        <label class="custom-control-label" for="defaultContactFormCopy6">OTHER</label>
+    </div> -->
+
+    <!-- Send button -->
+    <button class="btn btn-info btn-block" type="submit">Register</button>
+
+</form>
+
+</body>

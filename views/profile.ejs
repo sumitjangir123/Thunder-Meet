@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="<%=assetPath('css/profile.css')%>">
+<% if(locals.user.id == profile_user._id){%>
+
+<div class="profile-container">
+    <div class="inner-div">
+        <div class="upper-box">
+            <img src="<%=user.avatar%>" alt="profile_picture">
+            <div class="content">
+                <div class="inner-content animated zoomInRight">
+                    <p class="btn u_p"><%=user.name%></p>
+                    <p class="btn u_p"><%=user.email%></p>
+                    <div class="statistics">
+                        <p class="py-2 px-2">Posts &nbsp;<span id="value2" class="zoom"><%=post%></span></p>
+
+                        <p class="py-2 px-2">Followers &nbsp; <span id="value3"
+                                class="zoom"><%=user.friendships.length%></span></p>
+
+                        <!-- counting likes of all the post by traversing all the posts -->
+                        <p class=" py-2 px-2" class="zoom">Likes &nbsp;<span id="value4" class="zoom"> <%temp=0%>
+                            <%for(i of posts){%>
+                            <% temp=temp+i.likes.length %>
+                            <%}%>
+                            
+                            <%=temp%>
+                        </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lower-box">
+            <div class="over  animated zoomInDown">
+                <div class="up">
+                    <img src="<%=user.avatar%>" alt="profile_picture">
+                </div>
+                <div class="down" style="overflow: hidden;">
+                    <span id="header">ABOUT</span>
+
+                    <p>We are happy to welcome our <span id="value1" class="zoom"
+                            style="font-weight: bolder; color: red;"><%=number%></span> users to present on the
+                        industry's
+                        latest technologies. <br>
+                        prepare for an inspiration extravaganza.
+                    </p>
+                    <span class="z-depth-4 strip"></span>
+                </div>
+            </div>
+
+            <div class="lower-box-content">
+                <div class="lower-box-inner animated slideInRight">
+                    <div class="p-4 outer-form-section" id="old">
+                        <p class="btn w-100">Update Profile</p>
+                        <form action="/users/profile/update/<%=profile_user.id%>" enctype="multipart/form-data"
+                            method="POST">
+
+
+                            <!-- Name -->
+                            <div class="md-form my-5">
+                                <i class="fa fa-user prefix" style="color: #41e0d0;"></i>
+                                <input type="text" name="name" id="inputIconEx1" class="form-control" required>
+                                <label for="inputIconEx1">Your Name</label>
+                            </div>
+
+                            <!-- email -->
+                            <div class="md-form my-5">
+                                <i class="fas fa-envelope prefix" style="color: #41e0d0;"></i>
+                                <input type="email" name="email" id="inputIconEx2" class="form-control" required>
+                                <label for="inputIconEx2">E-mail address</label>
+                            </div>
+
+                            <input type="file" name="avatar" placeholder="Profile Picture" style="display: block;">
+
+                            <button type="submit" class="btn btn-md mt-3"
+                                style="background-color: #41e0d0;">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="new"></div>
+<%}else{%>
+<h4>Details : </h4>
+<h3>email : <%=profile_user.email%></h3>
+<h3>user id : <%=profile_user._id%></h3>
+<%}%>
+
+<a href="/"><img src="<%=assetPath('images/home.svg')%>" style="width: 100px; position: absolute; right: 0;"
+class="animated bounce slower infinite"></a>
+<script src="<%=assetPath('js/profile.js')%>"></script>

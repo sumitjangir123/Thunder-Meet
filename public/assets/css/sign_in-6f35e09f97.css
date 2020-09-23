@@ -1,0 +1,86 @@
+body {
+  font-family: sans-serif; }
+
+.common {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  z-index: 2; }
+
+.sign-section {
+  background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 100vh;
+  height: auto;
+  flex-wrap: wrap;
+  overflow: hidden; }
+  .sign-section .box1 {
+    margin: 10px;
+    border-radius: 10px;
+    position: relative;
+    max-width: 600px;
+    padding: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    color: #000; }
+    .sign-section .box1 h2 {
+      position: relative;
+      margin: 0 0 20px;
+      padding: 0;
+      text-transform: uppercase;
+      z-index: 2;
+      font-size: 1rem; }
+    .sign-section .box1 .form-section .btn {
+      padding: 10px; }
+  .sign-section .box1:before {
+    content: ' ';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    filter: blur(10px); }
+  .sign-section .box2 {
+    max-width: 400px;
+    height: 555px;
+    border-radius: 10px;
+    margin: 10px;
+    position: relative;
+    padding: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; }
+    .sign-section .box2:before {
+      content: ' ';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
+      background-attachment: fixed;
+      background-size: cover;
+      filter: blur(10px); }
+    .sign-section .box2 img {
+      border-radius: 50%;
+      width: 100px;
+      margin-right: 10px; }
+    .sign-section .box2 h2 {
+      font-size: 20px;
+      text-transform: uppercase; }
+    .sign-section .box2 p {
+      text-transform: uppercase; }
+      .sign-section .box2 p b {
+        font-weight: bold; }

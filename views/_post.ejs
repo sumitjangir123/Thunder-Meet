@@ -1,0 +1,73 @@
+<li id="post-<%=i.id%>" class="box">
+      
+        <div class="image-container z-depth-4 ">
+                <img src="<%=i.photos.photo%>" alt="posted-image" class="animated zoomInRight faster wow">
+        </div>
+        
+        <div class="except_img">
+                <div class="posts_content">
+                        <img id="avatar" src="<%=i.user.avatar%>" alt="avatar"> <span><%=i.content%></span>:
+                        <span id="user-name"><%=i.user.name%></span>
+                        <small>
+                                <%if(locals.user){%>
+                                <a class="toggle-like-button" data-likes="<%=i.likes.length %>"
+                                        href="/likes/toggle/?type=Post&id=<%=i._id%>"><%=i.likes.length%> Likes
+                                        <p id="check">
+                                                <% for(likes of i.likes) { %>
+                                                <%if(likes.user==user.id) {%>
+                                                Liked
+                                                <%}%>
+                                                <%}%>
+                                        </p>
+                                </a>
+                                <%}else{%>
+                                <p style="display: inline-block;"><%=i.likes.length%> Likes</p>
+                                <%}%>
+                        </small>
+                       </div>
+                
+                        
+                        
+                        <div class="post-comments">
+                                <% if (locals.user) {%>
+                                <form action="comment/create" id="post-<%=i._id%>-comments-form" method="POST">
+                                        <input type="text" name="content" placeholder="type here to add a comment. . .">
+                                        <input type="hidden" name="post" value="<%=i._id%>">
+                                        <button type="submit" value="add comment" class="btn two" style="border: 1px solid orange;">Add Comment</button>
+                                </form>
+                                <% } %>
+                
+                
+                                <% if(locals.user) {%>
+                                        <button style="border: 1px solid green;" class="btn two" onclick="showComments(this.id)" id="<%=i._id%>">COMMENTS</button>
+                                        
+                                        <%if(locals.user.id==i.user.id){%>
+                                                <a style="border:  1px solid red;" class="delete-post-button btn two" href="post/destroy/<%=i.id%>"><span><i class="fas fa-times-circle"></i> Delete This post</span></a>
+                                        <%}%>
+                                <%}%>
+                
+                                <div class="post-comments-list" id="comment_section_<%=i._id%>" style="display: none;">
+                                <ul id="post-comments-<%=i._id%>" class="comments-list">
+                                        <% for(comment of i.comment) { %>
+                                        <%- include('_comments')-%>
+                                        <%}%>
+                                         </ul>
+                                </div>
+                        </div>
+        </div>
+    
+        <hr style="display: block; border-top: 1px solid gray; width: 100%; ">
+    </li>
+
+
+    <script src="https://unpkg.com/grade-js/docs/dist/grade.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', function(){
+            /*
+                A NodeList of all your image containers (Or a single Node).
+                The library will locate an <img /> within each
+                container to create the gradient from.
+             */
+            Grade(document.querySelectorAll('.box'))
+        })
+    </script>

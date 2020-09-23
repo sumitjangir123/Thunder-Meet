@@ -1,0 +1,78 @@
+<body style="height: 100vh; width: 100%; background-color: teal; overflow-x: hidden;">
+    <p id="pollText">hi there, are you ready for polling.</p>
+    <form action="/poll/create" method="POST" style="border: 1px solid pink;" id="form">
+        <div id="formText">
+
+        </div>
+
+        <div id="outerOfDiv">
+            <div id="divid" style="display: block; align-items: center;">
+
+            </div>
+        </div>
+
+        </div>
+
+        <button type="submit" value="post" class="btn btn-primary btn-md">Generate Link</button>
+    </form>
+</body>
+<script type="text/javascript">
+    var textbox = document.createElement('input');
+    textbox.type = "hidden";
+    textbox.id = "title";
+    var data = prompt("enter the title of your poll.\neg. please select the date for next webinar.");
+    textbox.value = data;
+    textbox.name = "pollingData";
+    var poc=document.getElementById("formText");
+    poc.appendChild(textbox);
+    var x = prompt("please enter how many options you have ? (it should be number)\neg. 5");
+
+    var number=document.createElement("input");
+    number.type="hidden";
+    number.value=x;
+    number.name="times";
+    poc.appendChild(number);
+
+    var pollText = document.getElementById("pollText");
+    pollText.innerHTML = data;
+    pollText.style.width = "100%";
+    pollText.style.textAlign = "center";
+    pollText.style.fontSize = "22px"
+    pollText.style.color = "white";
+    pollText.className = "btn";
+    var i;
+    for (i = 0; i < x; i++) {
+        var div = document.createElement("div");
+        div.id = "same" + i;
+        var hold = document.getElementById("divid");
+        var checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.checked="checked";
+        checkbox.id = i + "1";
+        var temp = i + 1;
+        var label = document.createElement("label");
+        var labelText = prompt("enter your " + temp + " th " + " choice");
+        checkbox.name = "same";
+        var tn = document.createTextNode(labelText);
+        label.htmlFor = i + "1";
+        var para = document.createElement("span");
+        para.innerHTML = " : ";
+
+        var champ=document.createElement("input");
+        champ.value=labelText;
+        champ.name="all";
+        champ.type="hidden";
+        poc.appendChild(champ);
+
+        label.appendChild(tn);
+        div.appendChild(checkbox);
+        div.appendChild(para);
+        div.appendChild(label);
+
+        hold.appendChild(div);
+        document.getElementById("same" + i).style.color = "white";
+        document.getElementById("same" + i).style.fontSize = "19px";
+
+        document.getElementById("form").className = "p-5 z-depth-3 m-2";
+    }
+</script>

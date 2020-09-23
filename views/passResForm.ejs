@@ -1,0 +1,44 @@
+<div class="border  d-flex justify-content-center flex-wrap p-4">
+
+    <div class="w-75 z-depth-2 mb-4 bg-info slideInRight animated">
+            <p class="p-3">When entering your new password , please note that the password must be secure and is
+                    always more secure if you can mix numbers with letters.
+                    Once you have entered your new password and confirmed it, your password will then be reset.
+            </p>
+    </div>
+    <div class="w-75 z-depth-2 mb-4 bg-danger p-3 animated slideInLeft">
+            <p class="">
+                    Warning : please do not refresh the page, otherwise your token may be expired.
+            </p>
+    </div>
+    <div class="border w-75 p-4 img-fluid z-depth-2">
+
+            <div class="d-flex justify-content-center ">
+                    <p class="bg-warning p-3 rounded z-depth-2">Set new password</p>
+            </div>
+            <div>
+                    <form action="/users/set-new-password" method="POST">
+
+                            <!-- email -->
+                            <div class="md-form my-5">
+                                    <i class="fas fa-lock prefix"></i>
+                                    <input type="password" name="password" id="inputIconEx1" class="form-control"
+                                            required>
+                                    <label for="inputIconEx1">Enter your password</label>
+                            </div>
+                            <input type="hidden" name="token" value="<%=token%>">
+                            <!-- password -->
+                            <div class="md-form">
+                                    <i class="fas fa-lock prefix"></i>
+                                    <input type="password" id="inputValidationEx2" name="confirm_password"
+                                            class="form-control validate" required>
+                                    <label for="inputValidationEx2" data-error="wrong" data-success="right">Confirm
+                                            password</label>
+                            </div>
+
+                            <!-- Sign In Button -->
+                            <button type="submit" id="sign-in-submit" class="btn btn-success btn-md">Change password</button>
+                    </form>
+            </div>
+    </div>
+</div>

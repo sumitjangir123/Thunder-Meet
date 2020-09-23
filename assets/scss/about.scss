@@ -1,0 +1,331 @@
+section:nth-child(2n)
+{
+	background-color:#9e9b9b29;
+}
+
+section:nth-child(2n+1)
+{
+	background-color: white;
+}
+
+.top-style{
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+
+    .background-svg{
+        span{
+            width: 190px; 
+            height: 100px; 
+            position: absolute; 
+            top: 299px; 
+            left: 230px; 
+            z-index: -1;
+        }
+        img{
+            background-size: cover; 
+            height: 100vh;  
+            z-index: 1;
+        }
+    }
+    .overlay{
+        text-align: bottom;
+        width: 100%; 
+        height: 100vh; 
+        position: absolute;
+        color: lightslategray;
+        p{
+            letter-spacing: 2px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            font-family:'Times New Roman',Times, serif; 
+            padding: 20px;
+            margin: 10px; 
+            border-radius: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .top-style .background-svg span{
+        width: 110px;
+        top: 245px;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .top-style .videoItem{
+       z-index: -1;
+       display: none;
+    }
+}
+
+//for changing the color automatically
+.mydiv {
+    animation: myanimation 5s infinite;
+  }
+  
+@keyframes myanimation {
+    0% {background-color: red;}
+    25%{background-color:yellow;}
+    50%{background-color:green;}
+    75%{background-color:brown;}
+    100% {background-color: cadetblue;}
+}
+
+.mydivFont {
+    animation: myAnimation 5s infinite;
+  }
+  
+@keyframes myAnimation {
+    0% {color: red;}
+    25%{color:yellow;}
+    50%{color:green;}
+    75%{color:brown;}
+    100% {color: cadetblue;}
+}
+
+
+#about
+{
+	height: auto;
+	width: 100%;
+	margin-bottom: 20px;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+    #about-para
+    {
+        color:darkslategray;
+	    padding:5px;
+	    width: 70%;
+	    margin:auto;
+	    height: 100%;
+	    text-align: justify;
+        font-weight:100;
+        line-height: 28px;
+        font-size: 1.1rem;
+    }
+	.aff
+    {
+	    margin-top: 15px;
+	    color:grey;
+	    text-align: center;
+		ul li{
+            color:darkslategray;
+            list-style: none;
+            margin: 10px;
+        }
+    }
+}
+
+#skills{
+
+    .skill-header{
+        text-align: center;
+        color: blue;
+    }
+    .skill-display
+    {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:center;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 30px;
+    }
+
+    .skill-display-inside
+    {
+        display: flex;
+        justify-content: space-between;
+        width: 12rem;
+        height: 1.7rem;
+        margin: 50px;
+
+        .skill-image
+        {
+            height: 100%;
+            width: 30px;
+
+            img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+        .skill-progress
+        {
+            border-radius:0.8rem;
+            height: inherit;
+            width: 80%;
+            background-color: lightgrey;
+            overflow: hidden;
+            box-shadow: 1px 1px 2px 1px #b9b9b9 inset;
+            .skill-name span
+            {
+            color: white;
+            font-size: 1rem;
+            margin-left: 14px;
+            }
+        }
+    }
+
+  
+    .skill-progress > div
+    {
+        border-radius:20px 0px 0px 20px;
+        box-shadow: 1px 1px 5px 2px #989882;
+
+    }
+    .seventy-percent
+    {
+        width: 70%;
+        height: inherit;
+    }
+    .sixty-percent
+    {
+        width: 65%;
+        height: inherit;
+    }
+    .eighty-five-percent
+    {
+        width: 80%;
+        height: inherit;
+    }
+    .blue
+    {
+        background-color: #2857a4;
+    }
+
+    .orange
+    {
+        background-color: #ec4d1c;
+    }
+
+    .maroon
+    {
+        background-color: #B74F52;
+    }
+
+    .brown
+    {
+        background-color: #59343B;
+    }
+
+    .purple
+    {
+        background-color: #917BD0;
+    }
+    .yellow
+    {
+        background-color:#D8A800;
+        /* padding: 2px; */
+    }
+
+    .red
+    {
+        background-color: #E81123;
+    }
+
+    .teal
+    {
+        background-color: #0b8176;
+        padding: 2px;
+    }
+
+    .pink
+    {
+        background-color: #93738c;
+        padding: 2px;
+    }
+}
+
+
+
+
+#certificates{
+    width: 100%;
+    overflow: hidden;
+    h1{
+        text-align: center;
+    }
+
+    .port-display
+    {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        width:100%;
+        padding: 20px;
+        .outer{
+            width: auto;
+            margin-top: 10px;
+            a{
+                font-size: 25px;
+                color: black;
+                text-decoration: none;
+                p{
+                    padding: 10px;
+                }
+            }
+
+            img{
+                width: 350px;
+                height: 300px;
+                transition-duration: 0.2s;
+                &:hover{
+                    transition-duration: 0.2s;
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+#contact
+{
+	color: white;
+    background: #221715;
+
+
+    .skill{
+        text-align: center;
+        padding-top: 20px;
+        color: honeydew;
+    }
+
+    #contact-display
+    {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+
+        #form{
+            min-width: 40vw;
+            padding: 10px;
+        }
+        #aside-contact
+        {
+            height: 100%;
+            font-family: serif;
+            padding: 20px;
+            p{
+                font-size: 25px;
+            }
+        }
+    
+    }
+}
