@@ -2,15 +2,16 @@ const mongoose = require('mongoose');
 
 const friendshipSchema = new mongoose.Schema({
     // the user who sent this request
-    from_user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    classOf:{
+        type:String
     },
-    // the user who accepted this request, the naming is just to understand, otherwise, the users won't see a difference
-    to_user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    meetLinks: {
+        type: String
     },
+    localLinks:{
+        type:String
+    },
+    createdAt_1: { type: Date, expires: '45m', default: Date.now }
 },{
     timestamps: true
 });

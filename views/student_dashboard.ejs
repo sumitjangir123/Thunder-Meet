@@ -1,24 +1,100 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <meta name="HandheldFriendly" content="true">
+   <link rel="icon" type="image/png" href="/images/logo.png">
 	<title>Student | Thunder Meet</title>
-   <link rel="stylesheet" href="<%=assetPath('css/student_dashboard.css')%>">
-	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+   <link rel="stylesheet" href="/css/student_dashboard.css">
    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script>
-		$(document).ready(function(){
-			$(".hamburger").click(function(){
-			   $(".wrapper").toggleClass("collapse");
-			});
-		});
-	</script>
+  <style>
+      .open-button {
+        background: #444444;
+        color: white;
+        height: 40px;
+        width: 200px;
+        font-size: larger;
+      }
+      .open-button:hover {
+        background: black;
+        cursor: pointer;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      }
+      .open-button-2 {
+        background: #2e4ead;
+        color: white;
+        height: 40px;
+        width: 200px;
+        font-size: larger;
+      }
+      .open-button-2:hover {
+        background: #fff;
+        color: #2e4ead;
+        cursor: pointer;
+        border: 1px solid black;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      }
+      .wrapper#blur.active {
+        filter: blur(20px);
+        pointer-events: none;
+        user-select: none;
+      }
+      #popupForm {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        padding: 50px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        background: #fff;  
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.5s;
+      }
+      #popupForm h1 {
+        color: #683aa4;
+        text-align: center;
+      }
+      #popupForm label {
+        font-weight: bold;
+        display: block;
+        padding: 12px 0;
+      }
+      #popupForm .formbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:10px;
+        opacity: 0.8;
+      }
+      #popupForm .cancel {
+        background-color: red;
+      }
+      #popupForm input[type=number],select{
+        width: 70%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        /* border: none; */
+        border: 2px solid red;
+        border-radius: 4px;
+      }
+      #popupForm.active {
+        top: 50%;
+        visibility: visible;
+        opacity: 1;
+        transition: 0.5s;
+      }
+  </style>
 </head>
 <body>
-<div class="wrapper">
+
+<div class="wrapper" id="blur">
   <div class="top_navbar">
     <div class="hamburger">
        <div class="one"></div>
@@ -26,20 +102,234 @@
        <div class="three"></div>
     </div>
     <div class="top_menu">
-      <div class="logo"><img src="<%=assetPath('images/logo.png')%>" style="height: 80px;width: 80px;"></div>
-      <ul>
+      <div class="logo"><img src="<%=assetPath("images/logo.png")%>" style="height: 80px;width: 80px;"></div>
+      <!-- <ul>
         <li><a href="#">
           <i class="fas fa-search"></i></a></li>
         <li><a href="#">
           <i class="fas fa-bell"></i>
           </a></li>
-        <li><a href="#">
-          <i class="fas fa-user"></i>
+        <li><a href="#" id="logout">
+          <i class="fas fa-sign-out-alt"></i>
           </a></li>
-      </ul>
+      </ul> -->
+      <div class="navbar-right">
+        <div class="notifications">
+          <div class="icon_wrap">
+            <i class="far fa-bell"></i>
+          </div>
+          <div class="notification_dd">
+            <ul class="notification_ul">
+              <li class="success starbucks">
+                <div class="notify_icon">
+                  <span class="icon"></span>
+                </div>
+                <div class="notify_data">
+                  <div class="title">
+                    Doubt
+                  </div>
+                  <div class="sub_title">
+                    Doubt in netstat
+                  </div>
+                </div>
+                <div class="notify_status">
+                  <p>Resolved</p>
+                </div>
+              </li>
+              <li class="failed baskin_robbins">
+                <div class="notify_icon">
+                  <span class="icon"></span>
+                </div>
+                <div class="notify_data">
+                  <div class="title">
+                    Complaint
+                  </div>
+                  <div class="sub_title">
+                    Not able to update profile picture
+                  </div>
+                </div>
+                <div class="notify_status">
+                  <p>Pending</p>
+                </div>
+              </li>
+              <li class="success mcd">
+                <div class="notify_icon">
+                  <span class="icon"></span>
+                </div>
+                <div class="notify_data">
+                  <div class="title">
+                    Poor video
+                  </div>
+                  <div class="sub_title">
+                    Audio and video are lagging
+                  </div>
+                </div>
+                <div class="notify_status">
+                  <p>Resolved</p>
+                </div>
+              </li>
+              <li class="failed pizza_hut">
+                <div class="notify_icon">
+                  <span class="icon"></span>
+                </div>
+                <div class="notify_data">
+                  <div class="title">
+                    Chat disabled
+                  </div>
+                  <div class="sub_title">
+                    Not able to communicate via chat
+                  </div>
+                </div>
+                <div class="notify_status">
+                  <p>Pending</p>
+                </div>
+              </li>
+              <li class="success kfc">
+                <div class="notify_icon">
+                  <span class="icon"></span>
+                </div>
+                <div class="notify_data">
+                  <div class="title">
+                    404
+                  </div>
+                  <div class="sub_title">
+                    Problem not found
+                  </div>
+                </div>
+                <div class="notify_status">
+                  <p>Resolved</p>
+                </div>
+              </li>
+              <li class="show_all">
+                <p class="link">Show all activities</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="profile">
+          <div class="icon_wrap">
+            <img src="<%=locals.user.avatar%>" alt="user">
+            <span class="name"><%=locals.user.name%></span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="profile_dd">
+            <ul class="profile_ul">
+              <li class="profile_li">
+                <a href="#" class="settings">
+                  <i class="fas fa-user-cog"></i>
+                  <span class="picon"></span>
+                  Settings
+                </a>
+                <!-- <div class="btn"></div> -->
+              </li>
+              <li>
+                <a href="/users/SignOut" class="logout">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span class="picon"></span>
+                  Log out
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
+  <div class="popup">
+    <div class="shadow"></div>
+    <div class="popup_inner">
+      <div class="notification_dd">
+        <ul class="notification_ul">
+          <li class="title">
+            <p>All notifications</p>
+            <p class="close">
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </p>
+          </li>
+          <li class="success starbucks">
+            <div class="notify_icon">
+              <span class="icon"></span>
+            </div>
+            <div class="notify_data">
+              <div class="title">
+                Doubt
+              </div>
+              <div class="sub_title">
+                Doubt in netstat
+              </div>
+            </div>
+            <div class="notify_status">
+              <p>Resolved</p>
+            </div>
+          </li>
+          <li class="failed baskin_robbins">
+            <div class="notify_icon">
+              <span class="icon"></span>
+            </div>
+            <div class="notify_data">
+              <div class="title">
+                Attendance
+              </div>
+              <div class="sub_title">
+                30/9 - Attendance not counted
+              </div>
+            </div>
+            <div class="notify_status">
+              <p>Pending</p>
+            </div>
+          </li>
+          <li class="success mcd">
+            <div class="notify_icon">
+              <span class="icon"></span>
+            </div>
+            <div class="notify_data">
+              <div class="title">
+                Poor video
+              </div>
+              <div class="sub_title">
+                Video and audio are lagging here
+              </div>
+            </div>
+            <div class="notify_status">
+              <p>Success</p>
+            </div>
+          </li>
+          <li class="failed pizza_hut">
+            <div class="notify_icon">
+              <span class="icon"></span>
+            </div>
+            <div class="notify_data">
+              <div class="title">
+                Class
+              </div>
+              <div class="sub_title">
+                Not able to join class                
+              </div>
+            </div>
+            <div class="notify_status">
+              <p>Failed</p>
+            </div>
+          </li>
+          <li class="success kfc">
+            <div class="notify_icon">
+              <span class="icon"></span>
+            </div>
+            <div class="notify_data">
+              <div class="title">
+                Chat disabled
+              </div>
+              <div class="sub_title">
+                Not able to communicate via chat
+              </div>
+            </div>
+            <div class="notify_status">
+              <p>Success</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div id="tabs" class="sidebar">
       <ul>
         <li><a id="b1"  class="active">
@@ -56,6 +346,14 @@
              <!-- <button id="b2" >Classes</button> -->
             </span>
           </a></li>
+        <li>
+          <a id="b6" href="#tabs-liveClass">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span class="title">
+              Live
+            </span>
+          </a>
+        </li>
         <li><a id="b3" href="#tabs-assignments">
           <span class="icon"><i class="fas fa-tasks"></i></span>
           <span class="title">
@@ -80,79 +378,416 @@
     </ul>
   </div>
   
-  <div id="c1" class="main_container" >
-      <div class="item">
-         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="<%=user.avatar%>" alt="Card image cap">
-            <div class="card-body">
-            <p class="card-text">Hi <%=user.name%> ! All your assignments are complete till d. Good job.</p>
-            </div>
+  <div id="c1" class="main_container" style="display: block;background-color: white;">
+    <h1 style="color: #5A5C69;">Dashboard</h1>
+    <div class="summaryCards">
+      <div class="contentCard">
+        <div class="info">
+          <h1 style="color: #2e4ead;font-size: xx-large;"><%=user.totalClass%></h1>
+          <h3>Total classes hosted</h3>
+        </div>
+        <div class="sideLogo">
+          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="contentCard">
+        <div class="info">
+          <h1 style="color: #2e4ead;font-size: xx-large;">0</h1>
+          <h3>Classes cancelled</h3>
+        </div>
+        <div class="sideLogo">
+          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-emoji-smile" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683z"/>
+            <path d="M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="contentCard">
+        <div class="info">
+          <h1 style="color: #2e4ead;font-size: xx-large;">Verdict</h1>
+          <h3>Excellent student reviews</h3>
+        </div>
+        <div class="sideLogo">
+          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-emoji-sunglasses" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path fill-rule="evenodd" d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM6.5 6.497V6.5h-1c0-.568.447-.947.862-1.154C6.807 5.123 7.387 5 8 5s1.193.123 1.638.346c.415.207.862.586.862 1.154h-1v-.003l-.003-.01a.213.213 0 0 0-.036-.053.86.86 0 0 0-.27-.194C8.91 6.1 8.49 6 8 6c-.491 0-.912.1-1.19.24a.86.86 0 0 0-.271.194.213.213 0 0 0-.036.054l-.003.01z"/>
+            <path d="M2.31 5.243A1 1 0 0 1 3.28 4H6a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2h-.438a2 2 0 0 1-1.94-1.515L2.31 5.243zM9 5a1 1 0 0 1 1-1h2.72a1 1 0 0 1 .97 1.243l-.311 1.242A2 2 0 0 1 11.439 8H11a2 2 0 0 1-2-2V5z"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div id="date">
+      Wednesday, September 22
+    </div>
+
+    <div class="mainCards">
+      <div class="contentCard">
+        <div class="info">
+          <h1 style="color: #2e4ead;font-size: xx-large;">Vacant?</h1>
+          <h3 style="font-size:medium;">Even we can be mistaken. Cross check your time table</h3>
+          <button class="open-button-2" onclick="toggle()">Time table</button>
+        </div>
+      </div>  
+    </div>
+  </div>
+   <div id="c2" class="main_container" style="display: none;background-color: #fff;">
+      <!-- <h2 style="">Today's Schedule</h2> -->
+      <h2 style="font-size: 34px;color: #2e4ead;font-weight: 700;text-align: left;">Today's Schedule</h2>
+      <div class="lectures_wrapper">
+         <div class="lectures">
+            <h3>AI - Dr. Amit Kumar</h3>
+            <br>
+            <h4>10am - 10:50am</h4>
+         </div>
+         <div class="lectures">
+            <h3>CN - Dr. Isha Pathak Tripathi</h3>
+            <br>
+            <h4>11am - 11:50am</h4>
+         </div>
+         <div class="lectures">
+            <h3>ISS - Dr. Gyan Singh Yadav</h3>
+            <br>
+            <h4>12pm - 12:50am</h4>
+         </div>
+         <div class="lectures" style="margin-bottom: 40px;">
+            <h3>ToC - Dr. Ashish Sharma</h3>
+            <br>
+            <h4>2pm - 2:50pm</h4>
          </div>
       </div>
-  </div>
-  <div id="c2" class="main_container">
-   <div class="item">
-     Content 2
+      <h2 style="font-size: 34px;color: #2e4ead;font-weight: 700;text-align: left;">Past lectures</h2>
+
    </div>
-   </div>
-   <div id="c3" class="main_container">
+
+
+   <div id="c3" class="main_container" style="display: none;background-color: #fff;">
       <div class="item">
         Content 3
       </div>
     </div>
-    <div id="c4" class="main_container">
-      <div class="item">
-        Content 4
-      </div>
-    </div>
-    <div id="c5" class="main_container">
-      <div class="item">
-        Content 5
+
+
+
+    <div id="c4" class="main_container" style="display: none;background-color: white;">
+
+      <h1 style="color: #5A5C69;" class="animated hinge">Profile</h1>
+      <br>
+      <div class="summaryCards">
+        <div class="contentCard">
+          <div class="info">
+            <h1 style="color: #2e4ead;font-size: xx-large;"><%=user.name%></h1>
+            <br>
+            <h3>Roll No: <%=user.roll%></h3>
+            <h3>Year: <%=user.year%></h3>
+            <h3>Branch: <%=user.branch%></h3>
+            <h3>Email: <%=user.email%></h3>
+            <h3>Mobile: <%=user.contact%></h3>
+            <h3>Registered : <%=user.registered%></h3>
+            <h3><%=user.createdAt%></h3>
+            <br><br>
+            <p class="card-text" style="color: 6c757d;"><small class="text-muted">
+              <%=user.access%> of <%=user.org%>
+            </small></p>
+          </div>
+          <div class="sideLogo">
+            <img src="<%=user.avatar%>" alt="profile-picture" class="animated zoomInUp">
+            <button id="profileUpdate" style="display: none;">Update</button>
+          </div>
+        </div>
       </div>
     </div>
 
-    <script>
-       document.getElementById("b1").addEventListener("click",function(){
-         var content1 = document.getElementById("c1");
-         if(content1.style.display=="none"){
-            content1.style.display="block";
-         }else{
-            content1.style.display="none";
-         }
-       });
-       document.getElementById("b2").addEventListener("click",function(){
-         var content1 = document.getElementById("c2");
-         if(content1.style.display=="none"){
-            content1.style.display="block";
-         }else{
-            content1.style.display="none";
-         }
-       });
-       document.getElementById("b3").addEventListener("click",function(){
-         var content1 = document.getElementById("c3");
-         if(content1.style.display=="none"){
-            content1.style.display="block";
-         }else{
-            content1.style.display="none";
-         }
-       });
-       document.getElementById("b4").addEventListener("click",function(){
-         var content1 = document.getElementById("c4");
-         if(content1.style.display=="none"){
-            content1.style.display="block";
-         }else{
-            content1.style.display="none";
-         }
-       });
-       document.getElementById("b5").addEventListener("click",function(){
-         var content1 = document.getElementById("c5");
-         if(content1.style.display=="none"){
-            content1.style.display="block";
-         }else{
-            content1.style.display="none";
-         }
-       });
+
+
+    <div id="c5" class="main_container" style="display: none;background-color: #fff;">
+      <div class="left">
+        <div class="text">
+          <h1>Report an issue</h1>
+          <p></p>
+        </div>
+        <div class="photo"></div>
+      </div>
+      <div class="right">
+        <form action="">
+          <!-- <h2>Send a message</h2> -->
+                  <div class="inputBox">
+                     <input type="text" name="Name" required>
+                     <span>Full Name</span>
+                  </div>
+                  <div class="inputBox">
+                     <input type="email" name="email" required>
+                     <span>Email</span>
+                  </div>
+                  <div class="inputBox">
+                     <textarea  required></textarea>
+                     <span>Write your complaint here </span>
+                  </div>
+                  <div class="inputBox">
+                     <input type="submit" name="" value="Send">
+                  </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="c6" class="main_container" style="display: none;background-color: #fff;">
+
+      <div class="video-wrapper">
+        <div class="title">
+          <h2>current</h2>
+          <h2 id="demo"></h2>
+        </div>
+        <div class="vid">
+        <%if(user.friendships.length == 0){%>
+          <h3>No Scheduled Classes For Fow</h3>
+        <%}else{%>
+          <%for(i of links){%>
+            <p class="btn bg-primary">Class of <%=i.classOf%></p>
+            <a href="<%=i.meetLinks%>" class="btn bg-info">via Google Meet</a>
+            <a href="/dashboard/generate/<%=i.localLinks%>" class="btn bg-primary">Local meeting</a>
+            <%}%>
+          <%}%>
+        </div>
+      </div>
+    </div>
+    
+</div>
+
+
+
+<div id="popupForm">
+  <h1>Host a meeting</h1>
+  <br><br>
+  <form action="">
+    <label for="year">Year </label>
+    <select name="year" id="year">
+      <option value="year">Select year</option>
+      <option value="I">I</option>
+      <option value="II">II</option>
+      <option value="III">III</option>
+      <option value="IV">IV</option>
+    </select>
+    <label for="branch">Branch</label>
+    <select name="branch" id="branch">
+      <option value="branch">Select branch</option>
+      <option value="CSE">CSE</option>
+      <option value="ECE">ECE</option>
+      <option value="IT">IT</option>
+      <option value="ME">ME</option>
+      <option value="CHE">CHE</option>
+      <option value="other">Other</option>
+    </select>
+    <br><br>
+    <button id="hostSubmit" class="formbtn" onclick="toggle()">Host</button>
+    <button id="close" class="formbtn cancel" onclick="toggle()">Close</button>
+  </form>
+</div>
+
+  <script>
+    //for fetching time
+    var d = new Date();
+  var n = d.getHours();
+  document.getElementById("demo").innerHTML = n+"am - "+(n)+":45am";
+
+
+    document.getElementById("b1").addEventListener("click",function(){
+      var content1 = document.getElementById("c1");
+      var content2 = document.getElementById("c2");
+      var content3 = document.getElementById("c3");
+      var content4 = document.getElementById("c4");
+      var content5 = document.getElementById("c5");
+      var content6 = document.getElementById("c6");
+      if(content1.style.display=="none"){
+        content1.style.display="block";
+        content2.style.display="none";
+        content3.style.display="none";
+        content4.style.display="none";
+        content5.style.display="none";
+        content6.style.display="none";
+      }else{
+        content1.style.display="none";
+      }
+    });
+    document.getElementById("b2").addEventListener("click",function(){
+      var content1 = document.getElementById("c2");
+      var content2 = document.getElementById("c1");
+      var content3 = document.getElementById("c3");
+      var content4 = document.getElementById("c4");
+      var content5 = document.getElementById("c5");
+      var content6 = document.getElementById("c6");
+      if(content1.style.display=="none"){
+        content1.style.display="block";
+        content2.style.display="none";
+        content3.style.display="none";
+        content4.style.display="none";
+        content5.style.display="none";
+        content6.style.display="none";
+      }else{
+        content1.style.display="none";
+      }
+    });
+    document.getElementById("b3").addEventListener("click",function(){
+      var content1 = document.getElementById("c3");
+      var content2 = document.getElementById("c1");
+      var content3 = document.getElementById("c2");
+      var content4 = document.getElementById("c4");
+      var content5 = document.getElementById("c5");
+      var content6 = document.getElementById("c6");
+      if(content1.style.display=="none"){
+        content1.style.display="block";
+        content2.style.display="none";
+        content3.style.display="none";
+        content4.style.display="none";
+        content5.style.display="none";
+        content6.style.display="none";
+      }else{
+        content1.style.display="none";
+      }
+    });
+    document.getElementById("b4").addEventListener("click",function(){
+      var content1 = document.getElementById("c4");
+      var content2 = document.getElementById("c1");
+      var content3 = document.getElementById("c2");
+      var content4 = document.getElementById("c3");
+      var content5 = document.getElementById("c5");
+      var content6 = document.getElementById("c6");
+      if(content1.style.display=="none"){
+        content1.style.display="block";
+        content2.style.display="none";
+        content3.style.display="none";
+        content4.style.display="none";
+        content5.style.display="none";
+        content6.style.display="none";
+      }else{
+        content1.style.display="none";
+      }
+    });
+    document.getElementById("b5").addEventListener("click",function(){
+      var content1 = document.getElementById("c5");
+      var content2 = document.getElementById("c1");
+      var content3 = document.getElementById("c2");
+      var content4 = document.getElementById("c3");
+      var content5 = document.getElementById("c4");
+      var content6 = document.getElementById("c6");
+      if(content1.style.display=="none"){
+        content1.style.display="block";
+        content2.style.display="none";
+        content3.style.display="none";
+        content4.style.display="none";
+        content5.style.display="none";
+        content6.style.display="none";
+      }else{
+        content1.style.display="none";
+      }
+    });
+    document.getElementById("b6").addEventListener("click",function(){
+      var content1 = document.getElementById("c6");
+      var content2 = document.getElementById("c1");
+      var content3 = document.getElementById("c2");
+      var content4 = document.getElementById("c3");
+      var content5 = document.getElementById("c4");
+      var content6 = document.getElementById("c5");
+      if(content1.style.display=="none"){
+        content1.style.display="block";
+        content2.style.display="none";
+        content3.style.display="none";
+        content4.style.display="none";
+        content5.style.display="none";
+        content6.style.display="none";
+      }else{
+        content1.style.display="none";
+      }
+    });
+  </script>
+
+    <script type="text/javascript">
+      function toggle() {
+        var blur = document.getElementById('blur');
+        blur.classList.toggle('active');
+        var popup = document.getElementById('popupForm');
+        popup.classList.toggle('active');
+      }  
     </script>
+    <script>
+      $(function(){
+        $('a#logout').click(function(){
+            if(confirm('Are you sure to logout')) {
+                return true;
+            }
 
+            return false;
+        });
+      });
+    </script>
+    <script>
+      var isCollapsed = false;
+      $(document).ready(function(){
+        $(".hamburger").click(function(){
+           $(".wrapper").toggleClass("collapse");
+        });
+        $(".profile .icon_wrap").click(function(){
+          $(this).parent().toggleClass("active");
+          $(".notifications").removeClass("active");
+          if(!($(".wrapper").hasClass("collapse"))){
+            if($(window).width() <= 1060){
+              $(".wrapper").toggleClass("collapse");
+            }
+          }
+        });
+        $(".notifications .icon_wrap").click(function(){
+          $(this).parent().toggleClass("active");
+          $(".profile").removeClass("active");
+          if(!($(".wrapper").hasClass("collapse"))){
+            if($(window).width() <= 1060){
+              $(".wrapper").toggleClass("collapse");
+            }
+          }
+        });
+        $(".link").click(function() {
+          $(".notifications").removeClass("active");
+          $(".popup").addClass("active");
+        });
+        $(".close").click(function(){
+          $(".popup").removeClass("active");
+        });
+        // $("body").click(function() {
+        //   if (!$(this.target).is('.notifications')) {
+        //     $(".notifications").removeClass("active");
+        //   }
+        //   else if (!$(this.target).is('.profile')) {
+        //     $(".profile").removeClass("active");
+        //   }
+        // }
+        $('body').click(function() {
+            $(".popupForm").removeClass("active");
+            $(".profile").removeClass("active");
+            $(".notifications").removeClass("active");
+        });
+
+        $('.popupForm').click(function(e) {
+            e.stopPropagation();
+        });
+        $('.profile').click(function(e) {
+            e.stopPropagation();
+        });
+        $('.notifications').click(function(e) {
+            e.stopPropagation();
+        });
+        if($(window).width() <= 1060){
+          $(".wrapper").toggleClass("collapse");
+        }
+        $('#b6').click(function(){
+          $('.wrapper').toggleClass("collapse");
+          isCollapsed = true;
+        });
+        // if(isCollapsed==true){
+        //   $('.wrapper').toggleClass("collapse");
+        //   isCollapsed = false;
+        // }
+      });
+    </script>
 </body>
 </html>

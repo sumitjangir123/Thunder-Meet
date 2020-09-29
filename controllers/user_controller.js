@@ -1,6 +1,5 @@
 const User = require("../models/user");
 const Post = require('../models/post');
-const Friends = require('../models/friendship');
 const fs = require('fs');
 const path = require('path');
 const queue = require('../config/kue');
@@ -90,7 +89,7 @@ module.exports.create_user =async function (req, res) {
             token : req.body.AccessToken
         })
 
-        if(org.length != 0){
+        if(org){
             let user=await User.findOneAndUpdate({name:req.user.name,email:req.user.email}, {
                 contact: req.body.contact,
                 roll: req.body.roll,
@@ -269,29 +268,4 @@ module.exports.setNewPass = async function (req, res) {
     } catch (error) {
         console.log('error', error); return;
     }
-}
-
-module.exports.AddFriend = async function (req, res) {
-    let frands = await Friends.create({
-        from_user: req.query.from,
-        to_user: req.query.to
-    });
-
-    //after creating frands push it into the array of friendships that is present in user's model for both the users receiver and sender  after that save it. 
-    let Fromuser= await User.findById(req.user.id);
-    let Touser= await User.findById(req.query.to);
-    
-    Fromuser.friendships.push(frands);
-    Fromuser.save();
-    
-    Touser.friendships.push(frands);
-    Touser.save();
-
-    return res.redirect('back');
-}
-
-module.exports.createPoll=async function(req,res){
-    return res.render("polling",{
-        title:"Create Poll"
-    });
 }

@@ -21,7 +21,8 @@ module.exports.home = async function (req, res) {
             }).populate('likes');
         
         //populate users
-        let users = await User.find({});
+        let users = await User.find({})
+        
         let poll= await Poll.find({})
         .sort('-createdAt')
         .populate({
@@ -31,11 +32,7 @@ module.exports.home = async function (req, res) {
             }
         }).populate('user');
       
-        //populate the array of friendships that is present in users schema but only if user is signed in
-        if(req.user){
-            await req.user.populate('friendships').execPopulate();
-        }
-    
+     
 
         return res.render('home', {
             post_list: post_list,

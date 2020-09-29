@@ -56,9 +56,12 @@ const userSchema=new mongoose.Schema({
     token:{
         type:String
     },
+    totalClass:{
+        type:Number
+    },
     friendships: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Friendship'
+            ref: 'Friendship',
     }]
 },{
     timestamps:true

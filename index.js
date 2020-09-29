@@ -6,6 +6,7 @@ const logger= require('morgan');
 const cors = require('cors');
 const cookieParser= require('cookie-parser');
 const app= express();
+
 //to make helper available as locals to access them
 require('./config/view-helpers')(app);
 
@@ -33,6 +34,13 @@ chatServer.listen(5000);
 console.log("chat server is listening on port 5000");
 const path= require('path');
 
+//setup the video server to be used with peers and socket.icon
+
+const videoServer = require('http').Server(app);
+const videoSockets= require('./config/video_sockets').videoSockets(videoServer);
+videoServer.listen(3000)
+
+
 if(env.name=='development'){
     app.use(sassMiddleware({
         src : path.join(__dirname,env.asset_path,'scss'),
@@ -46,6 +54,8 @@ if(env.name=='development'){
 app.use(express.urlencoded({
     extended: false
   }));
+
+
 
 app.use(cors());
 app.use(cookieParser());

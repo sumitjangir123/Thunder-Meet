@@ -15,7 +15,6 @@ router.use("/post",require("./posts"));
 router.use("/comment",require('./comments'));
 router.use("/api",require('./api'));
 router.use("/likes",require('./likes'));
-router.use("/poll",require('./poll'));
 router.use("/dashboard",require('./dashboard'));
 router.use("/organizations",require('./organizations'));
 //make it for outer index.js

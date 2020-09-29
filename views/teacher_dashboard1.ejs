@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <meta name="HandheldFriendly" content="true">
+   <link rel="icon" type="image/png" href="<%=assetPath("images/logo.png")%>">
+	<title>Teacher | Thunder Meet</title>
+   <link rel="stylesheet" href="<%=assetPath("css/student_dashboard.css")%>">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+		$(document).ready(function(){
+			$(".hamburger").click(function(){
+        console.log($(".wrapper"));
+			   $(".wrapper").toggleClass("collapse");
+			});
+		});
+  </script>
+  
+  <style>
+      .open-button {
+        background: #444444;
+        color: white;
+        height: 40px;
+        width: 200px;
+        font-size: larger;
+      }
+      .open-button:hover {
+        background: black;
+        cursor: pointer;
+      }
+      .wrapper#blur.active {
+        filter: blur(20px);
+        pointer-events: none;
+        user-select: none;
+      }
+      #popupForm {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        padding: 50px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        background: #fff;  
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.5s;
+      }
+      #popupForm h1 {
+        color: #683aa4;
+        text-align: center;
+      }
+      #popupForm label {
+        font-weight: bold;
+        display: block;
+        padding: 12px 0;
+      }
+      #popupForm .formbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:10px;
+        opacity: 0.8;
+      }
+      #popupForm .cancel {
+        background-color: red;
+      }
+      #popupForm input[type=number],select{
+        width: 70%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        /* border: none; */
+        border: 2px solid red;
+        border-radius: 4px;
+      }
+      #popupForm.active {
+        top: 50%;
+        visibility: visible;
+        opacity: 1;
+        transition: 0.5s;
+      }
+  </style>
+</head>
+<body>
+
+<div class="wrapper" id="blur">
+  <div class="top_navbar">
+    <div class="hamburger">
+       <div class="one"></div>
+       <div class="two"></div>
+       <div class="three"></div>
+    </div>
+    <div class="top_menu">
+      <div class="logo"><img src="<%=assetPath("images/logo.png")%>" style="height: 80px;width: 80px;"></div>
+      <ul>
+        <li><a href="#">
+          <i class="fas fa-search"></i></a></li>
+        <li><a href="#">
+          <i class="fas fa-bell"></i>
+          </a></li>
+        <li><a href="#">
+          <i class="fas fa-user"></i>
+          </a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div id="tabs" class="sidebar">
+      <ul>
+        <li><a id="b1"  class="active">
+          <span class="icon"><i class="fas fa-home"></i></span>
+          <span class="title">
+           <!-- <button id="b1" >Home</button>  -->
+            Home
+         
+          </span></a></li>
+        <li><a id="b2" href="#tabs-classes">
+          <span class="icon"><i class="fas fa-hourglass"></i></span>
+          <span class="title">
+             Classes
+             <!-- <button id="b2" >Classes</button> -->
+            </span>
+          </a></li>
+        <li><a id="b3" href="#tabs-assignments">
+          <span class="icon"><i class="fas fa-tasks"></i></span>
+          <span class="title">
+             Students
+             <!-- <button id="b3" >Assignments</button> -->
+            </span>
+          </a></li>
+        <li><a id="b4" href="#tabs-profile">
+          <span class="icon"><i class="fas fa-user"></i></span>
+          <span class="title">
+            <!-- <button id="b4" >Profile</button> -->
+            Profile
+            </span>
+          </a></li>
+        <li><a id="b5" href="#tabs-report">
+          <span class="icon"><i class="fas fa-flag"></i></span>
+          <span class="title">
+             Report
+             <!-- <button id="b5">Report</button> -->
+            </span>
+          </a></li>
+    </ul>
+  </div>
+  
+  <div id="c1" class="main_container" style="display: block;">
+      <div class="item">
+         <div class="card" style="width: auto;">
+            <img class="card-img-top" style="max-width: 200px;" src="<%=locals.user.avatar%>" alt="Card image cap">
+            <div class="card-body">
+            <p class="card-text">Hi <%=locals.user.name %>! Host a class</p>
+            <br>
+            <!-- <a href="">Click here</a> -->
+            <button class="open-button" onclick="toggle()">Click here</button>
+            </div>
+         </div>
+      </div>
+  </div>
+  <div id="c2" class="main_container" style="display: none;">
+   <div class="item">
+     Content 2
+   </div>
+   </div>
+   <div id="c3" class="main_container" style="display: none;">
+      <div class="item">
+        <h1>total students registered of your institute till now <%=students.length%></h1>
+        <br><br>
+        <ul>
+          <%var k=0%>
+          <% for(student of students) { %>
+              <%k++%>
+              <div style="width: 100%;">
+                <span style="width: 50%; text-align: center;"><%=k%>. <%=student.name %></span>  :  <span style="width: 50%; text-align: center;"><%=student.email%></span>
+                <span><%=student.branch%></span>
+              <br>
+              </div>
+          <%}%>
+          </ul>
+
+       
+      </div>
+    </div>
+    <div id="c4" class="main_container" style="display: none;">
+      <div class="item">
+       <a href="/dashboard/generate"><button>click here</button></a> 
+      </div>
+    </div>
+    <div id="c5" class="main_container" style="display: none;">
+      <div class="item">
+        Content 5
+      </div>
+    </div>
+</div>
+
+
+<div id="popupForm">
+  <h1>Host a meeting</h1>
+  <br><br>
+  <form action="/dashboard/createClass" method="POST">
+    <label for="year">Year </label>
+    <select name="year" id="year">
+      <option value="year">Select year</option>
+      <option value="1">I</option>
+      <option value="2">II</option>
+      <option value="3">III</option>
+      <option value="4">IV</option>
+    </select>
+    <label for="branch">Branch</label>
+    <select name="branch" id="branch">
+      <option value="branch">Select branch</option>
+      <option value="CSE">CSE</option>
+      <option value="ECE">ECE</option>
+      <option value="IT">MECH</option>
+      <option value="ME">CHEMICAL</option>
+      <option value="CHE">CIVIL</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="subject">Subject</label>
+    <input style="padding: 50px;" type="text" id="subject" name="subject" placeholder="subject" required>
+    <br><br>
+    <button id="hostSubmit" class="formbtn" onclick="toggle()">Host</button>
+    <button id="close" class="formbtn cancel" onclick="toggle()">Close</button>
+  </form>
+</div>
+    
+    <script>
+       document.getElementById("b1").addEventListener("click",function(){
+         var content1 = document.getElementById("c1");
+         var content2 = document.getElementById("c2");
+         var content3 = document.getElementById("c3");
+         var content4 = document.getElementById("c4");
+         var content5 = document.getElementById("c5");
+         if(content1.style.display=="none"){
+            content1.style.display="block";
+            content2.style.display="none";
+            content3.style.display="none";
+            content4.style.display="none";
+            content5.style.display="none";
+         }else{
+            content1.style.display="none";
+         }
+       });
+       document.getElementById("b2").addEventListener("click",function(){
+         var content1 = document.getElementById("c2");
+         var content2 = document.getElementById("c1");
+         var content3 = document.getElementById("c3");
+         var content4 = document.getElementById("c4");
+         var content5 = document.getElementById("c5");
+         if(content1.style.display=="none"){
+            content1.style.display="block";
+            content2.style.display="none";
+            content3.style.display="none";
+            content4.style.display="none";
+            content5.style.display="none";
+         }else{
+            content1.style.display="none";
+         }
+       });
+       document.getElementById("b3").addEventListener("click",function(){
+         var content1 = document.getElementById("c3");
+         var content2 = document.getElementById("c1");
+         var content3 = document.getElementById("c2");
+         var content4 = document.getElementById("c4");
+         var content5 = document.getElementById("c5");
+         if(content1.style.display=="none"){
+            content1.style.display="block";
+            content2.style.display="none";
+            content3.style.display="none";
+            content4.style.display="none";
+            content5.style.display="none";
+         }else{
+            content1.style.display="none";
+         }
+       });
+       document.getElementById("b4").addEventListener("click",function(){
+         var content1 = document.getElementById("c4");
+         var content2 = document.getElementById("c1");
+         var content3 = document.getElementById("c2");
+         var content4 = document.getElementById("c3");
+         var content5 = document.getElementById("c5");
+         if(content1.style.display=="none"){
+            content1.style.display="block";
+            content2.style.display="none";
+            content3.style.display="none";
+            content4.style.display="none";
+            content5.style.display="none";
+         }else{
+            content1.style.display="none";
+         }
+       });
+       document.getElementById("b5").addEventListener("click",function(){
+         var content1 = document.getElementById("c5");
+         var content2 = document.getElementById("c1");
+         var content3 = document.getElementById("c2");
+         var content4 = document.getElementById("c3");
+         var content5 = document.getElementById("c4");
+         if(content1.style.display=="none"){
+            content1.style.display="block";
+            content2.style.display="none";
+            content3.style.display="none";
+            content4.style.display="none";
+            content5.style.display="none";
+         }else{
+            content1.style.display="none";
+         }
+       });
+    </script>
+
+    <script type="text/javascript">
+      function toggle() {
+        var blur = document.getElementById('blur');
+        blur.classList.toggle('active');
+        var popup = document.getElementById('popupForm');
+        popup.classList.toggle('active');
+      }  
+    </script>
+</body>
+</html>
