@@ -23,15 +23,15 @@ const development= {
         secure: false, // true for 465, false for other ports
         auth: {
           user: 'thethunderbirdus@gmail.com',
-          pass: ''
+          pass: 'thunderbird1234'
         }
     },
     google_client_id: "922852696533-qrr4lrcdb3uj5sjdjcqi1g90fc5mpsoq.apps.googleusercontent.com",
-    google_client_secret: "",
+    google_client_secret: "Vu8_IYaYygO-z07kp80i7356",
     google_call_back_url: "http://localhost:8000/users/auth/google/callback",
 
     facebook_client_id: "549980429009358",
-    facebook_client_secret: "",
+    facebook_client_secret: "3f007a155b585a2b535979052b07b5fd",
     facebook_call_back_url: "http://localhost:8000/users/auth/facebook/callback",
 
     jwt_secret: 'codeial',

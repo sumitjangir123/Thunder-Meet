@@ -15,7 +15,7 @@
       
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-      <link rel="stylesheet" href="/css/styles.css" />
+      <link rel="stylesheet" href="/css/main.css" />
 
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
    </head>
@@ -45,96 +45,118 @@
 
       <!-- Top Navbar begins-->
 
-      <nav class="navbar navbar-expand-lg fixed-top auto-hiding-navbar">
-         <div class="container">
-            <a class="navbar-brand" href="#">
-               <img src="../images/logo.png" alt="logo" style="height: 90px;width: 90px;"/>
-            </a>
-            <!-- <a id="title-main" class="navbar-brand" href="#">
-               Thunder Meet
+      <nav class="navigation">
+         <div class="content">
+            <div class="tm-title"><img src="/images/logo.png" alt="logo"></div>
+            <!-- <a href="" class="toggle-button">
+               <span class="bar"></span>
+               <span class="bar"></span>
+               <span class="bar"></span>            
             </a> -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-               <ul class="navbar-nav">
-                  <li class="nav-item active">
-                     <a class="nav-link" href="#">
-                        Home 
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#need">
-                        Features 
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="#about-us">
-                        Need 
-                     </a>
-                  </li>
-                  <li class="nav-item" >
-                     <a class="nav-link" href="#founders">
-                        Founders 
-                     </a>
-                  </li>
-                  
-                  <li class="nav-item" >
-                     <a class="nav-link" href="#end">
-                        Contact us 
-                     </a>
-                  </li>      
-               </ul>
-               <ul class="navbar-nav ml-auto">
-                  
+            <div class="navigation-links">
+               <ul>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#need">Features</a></li>
+                  <li><a href="#about-us">Need</a></li>
+                  <li><a href="#founders">Founders</a></li>
+                  <li><a href="#end">Contact Us</a></li>
+
+
                   <%if(locals.user && locals.user.access=="student"){%>
-                     <li class="nav-item " >
-                        <a class="nav-link" href="/dashboard/student">
-                           <button class="btn navbar-btn" id="login-button">Student Dashboard </button> 
+                     <li>
+                        <a href="/dashboard/student" id="login-button">Dashboard 
                         </a>
                      </li>
-                     <li class="nav-item " >
-                        <a class="nav-link" href="users/SignOut">
-                           <button class="btn navbar-btn" id="login-button">SignOut</button> 
+                     <li>
+                        <a href="users/SignOut" id="login-button">Logout
                         </a>
                      </li>
                      <%}else if(locals.user && locals.user.access=="teacher"){%>
-                        <li class="nav-item" >
-                           <a class="nav-link" href="/dashboard/teacher">
-                              <button id="signup-button" class="btn navbar-btn">Teacher Dashboard</button> 
+                        <li>
+                           <a href="/dashboard/teacher" id="signup-button">
+ Dashboard 
                            </a>
                         </li>
-                        <li class="nav-item " >
-                           <a class="nav-link" href="users/SignOut">
-                              <button class="btn navbar-btn" id="login-button">SignOut</button> 
+                        <li>
+                           <a href="users/SignOut" id="login-button">Logout
                            </a>
                         </li>
                      <%}else if(locals.user){%>
-                        <li class="nav-item " >
-                           <a class="nav-link" href="users/signIn">
-                              <button class="btn navbar-btn" id="login-button">Register </button> 
+                        <li >
+                           <a href="users/signIn" id="login-button">
+                              Register 
                            </a>
                         </li>
                      <%}else {%>
                       
-                        <li class="nav-item " >
-                           <a class="nav-link" href="users/signIn">
-                              <button class="btn navbar-btn" id="login-button">Login</button> 
+                        <li >
+                           <a href="users/signIn" id="login-button">Login 
                            </a>
                         </li>
 
-                        <li class="nav-item" >
-                           <a class="nav-link" href="users/signUp">
-                              <button id="signup-button" class="btn navbar-btn">Sign Up</button> 
+                        <li>
+                           <a href="users/signUp" id="signup-button">Sign Up 
                            </a>
                         </li>
                      <%}%>
-                
+
+
+
+
+
+
+
+
+
+                  <!-- <li><a href="" id="login-button">Login</a></li>
+                  <li><a href="" id="signup-button">Sign up</a></li> -->
+               </ul>
+            </div>
+            <div class="navigation-links" id="smallDevices">
+               <ul>
+                  <%if(locals.user && locals.user.access=="student"){%>
+                     <li>
+                        <a href="/dashboard/student" id="login-button">Dashboard 
+                        </a>
+                     </li>
+                     <li>
+                        <a href="users/SignOut" id="login-button">SignOut 
+                        </a>
+                     </li>
+                     <%}else if(locals.user && locals.user.access=="teacher"){%>
+                        <li>
+                           <a href="/dashboard/teacher" id="signup-button">
+                              Dashboard 
+                           </a>
+                        </li>
+                        <li>
+                           <a href="users/SignOut" id="login-button">SignOut
+                           </a>
+                        </li>
+                     <%}else if(locals.user){%>
+                        <li >
+                           <a href="users/signIn" id="login-button">
+                              Register 
+                           </a>
+                        </li>
+                     <%}else {%>
+                      
+                        <li >
+                           <a href="users/signIn" id="login-button">Login 
+                           </a>
+                        </li>
+
+                        <li>
+                           <a href="users/signUp" id="signup-button">Sign Up 
+                           </a>
+                        </li>
+                     <%}%>
+                  <!-- <li><a href="" id="login-button">Login</a></li>
+                  <li><a href="" id="signup-button">Sign up</a></li> -->
                </ul>
             </div>
          </div>
-       </nav>
-
+      </nav>
       <!-- Top Navbar ends-->
 
       <!-- Intro Section begins -->
@@ -147,7 +169,7 @@
                   <p>Sick of hearing about the privacy issues of ZOOM? Or did you get tired of looking into your time table for every class? Worried that unwanted people might join your Google meeting?
                   <br>Don't worry! Thunder Meet got everything covered.
                   </p>
-                  <button class="btn btn-dark btn-lg"> Learn more </button>
+                  <button class="btn"> Learn more </button>
                </div>
                <div class="col img-col">
                   <img src="../images/student_image.jpg" alt="main-image" class="image-fluid"> 
@@ -179,8 +201,7 @@
                      <div class="card-body">
                         <img src="../images/online_image.png" alt="advantage 3" class="icon" />
                        <h5 class="card-title">Online classes</h5>
-                       <p class="card-text">The youth of a nation is what empowers it. Do not let COVID affect the education of the youth. Conduct classes smoothly over Thunder Meet</p>
-                     </div>
+                       <p class="card-text">The youth of a nation is what empowers it. Do not let COVID affect the education of the youth.                     </div>
                    </div>
                </div>
 
@@ -197,10 +218,12 @@
            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+         
          </ol>
          <div class="carousel-inner">
+          
            <div class="carousel-item active" data-interval="10000">
-             <img src="../images/doubt_image2.png" class="d-block w-100" alt="Snapshot 1" />
+             <img src="<%=assetPath("images/3.png")%>" class="d-block w-100" alt="Snapshot 1" />
              <div class="carousel-caption d-none d-md-block" style="color: #683aa4;">
                <i class="fas fa-chalkboard-teacher"></i>
                <h5>No limitations</h5>
@@ -208,17 +231,17 @@
              </div>
            </div>
            <div class="carousel-item" data-interval="10000">
-             <img src="../images/meeting_image.jpg" class="d-block w-100" alt="Snapshot 2" />
+             <img src="<%=assetPath("images/2.png")%>" class="d-block w-100" alt="Snapshot 2" />
              <div class="carousel-caption d-none d-md-block">
-               <h5>Second slide label</h5>
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+               <h5 style="color: black;">Login and that's it!</h5>
+               <p style="color: black;">Every information at your "home step"</p>
              </div>
            </div>
            <div class="carousel-item" data-interval="10000">
-             <img src="../images/about-image.jpg" class="d-block w-100" alt="Snapshot 3" />
+             <img src="<%=assetPath("images/4.png")%>" class="d-block w-100" alt="Snapshot 3" />
              <div class="carousel-caption d-none d-md-block">
-               <h5>Third slide label</h5>
-               <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+               <h5 style="color: black;">Still worried?</h5>
+               <p style="color: black;">We have a ton of features to help you out. Keep scrolling.</p>
              </div>
            </div>
          </div>
@@ -228,7 +251,7 @@
          </a>
          <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-           <span class="sr-only">Next</span>
+           <span class="sr-only" style="color: black;">Next</span>
          </a>
        </div>
 
@@ -246,17 +269,18 @@
                <div class="col">
                   <h1>Why Thunder Meet</h1>
                   <p>
-                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                     COVID-19 has impacted all our lives. We’ve witnessed the best of the best failing in this pandemic. 
+                     Keeping the target of creating a platform that does not stop at any cost, we present to you, Thunder Meet.
+                  <br>Don't worry! Thunder Meet got everything covered.
                   </p>
-                  <a href="organizations/register"><button class="btn btn-dark btn-lg">Join Us</button></a>
+                  <a href="organizations/register"><button class="btn btn-lg">Join Us</button></a>
                   
                </div>
             </div>
          </div>
 
       </section>
-      
-      <%=locals.user%>
+   
       <!-- About us section ends -->
 
       <!-- Founders section begins -->
@@ -268,7 +292,7 @@
                   <h1>Meet the founders</h1>
                   <p>We at Thunder Meet burn our midnight oil to ensure that your meetings are hassle-free. Say Hi to the founders.</p>
                </div>
-               <div class="row align-items center">
+               <div class="row align-items center" id="foundersImages">
                   <div class="col">
                      <div class="card mb-3">
                         <img src="../images/upkar_image.jpg" class="card-img-top" alt="Upkar Saraswat">

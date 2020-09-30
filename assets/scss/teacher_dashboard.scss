@@ -665,11 +665,12 @@
 	 color: white;
 	 background: #2e4ead;
 	 display: flex;
-	 width: 1340px;
+	 width: auto;
 	 height: 40px;
 	 flex-direction: row;
+	 flex-wrap: wrap;
 	 align-items: center;
-	 justify-content: space-between;
+	 justify-content: space-around;
 	 margin-bottom: 20px;
 }
  #date {
@@ -771,7 +772,7 @@
 		 height: 100%;
 	}
 	 #c6 .vid video {
-		 width: 100% !important;
+		 width: 100%;
 		 height: auto !important;
 		 min-height: 300px;
 	}

@@ -73,7 +73,7 @@ module.exports.createClass = async function (req, res) {
         token: req.user.token
     });
 
-
+    
     let users = await User.find({
         access: "student",
         org: org.organization,
@@ -127,7 +127,7 @@ module.exports.createClass = async function (req, res) {
 
     const oAuth2Client = new OAuth2(
         '656640366395-5tcdds420ghq7195tfsbi04i7rduaans.apps.googleusercontent.com',
-        ''
+        'hFTuBGp0WALLex6g9eh2mrCZ'
     )
 
     oAuth2Client.setCredentials({
@@ -241,7 +241,7 @@ module.exports.createClass = async function (req, res) {
                             // Create a new instance of oAuth and set our Client ID & Client Secret.
                             const oAuth2Client = new OAuth2(
                                 '656640366395-5tcdds420ghq7195tfsbi04i7rduaans.apps.googleusercontent.com',
-                                ''
+                                'hFTuBGp0WALLex6g9eh2mrCZ'
                             )
 
                             oAuth2Client.setCredentials({

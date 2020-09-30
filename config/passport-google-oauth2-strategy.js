@@ -25,7 +25,7 @@ const { json } = require('express');
 //tell passport to use a new strategy for google login 
 passport.use(new googleStrategy({
   clientID: "656640366395-5tcdds420ghq7195tfsbi04i7rduaans.apps.googleusercontent.com",
-  clientSecret: "",
+  clientSecret: "hFTuBGp0WALLex6g9eh2mrCZ",
   callbackURL: "http://localhost:8000/users/auth/google/callback"
 },
   function (accessToken, refreshToken, requestParams, profile, cb) {

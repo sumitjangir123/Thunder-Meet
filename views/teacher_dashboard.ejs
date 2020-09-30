@@ -431,15 +431,17 @@
       <h2>Host a meeting</h2>
     </div>
     <div class="choices">
-      <div class="thunder-meet">
-        <h2>Host it right here, using Thunder Meet.</h2>
-        <img src="<%=assetPath("images/logo.png")%>" alt="thunder-meet">
-        <a href="/dashboard/generate"><button class="open-button">click here</button></a>
-      </div>
       <div class="google-meet">
-        <h2>Facing trouble, try Google Meet instead.</h2>
-        <img src="<%=assetPath("images/googlemeetlogo.png")%>" alt="google-meet">
-        <button class="open-button" style="margin-top: 35px;" onclick="toggle()">Click here</button>
+        <h1>Hosting a class is simple</h1>
+        <p class="border-pill">
+          If the current slot is not occupied, just go to classes choose the year and branch you want to host the meeting for, click host and you’re good to go!
+          Refresh the page. Go to live classes. If number of students is less, for example in a doubt class, we suggest you choose local meeting. Else, feel free 
+          to use Google Meet anytime. Join the meeting with a button click. It’s that easy.
+        </p>
+          <br>
+         <p style="color: red;"> If the slot is occupied, you’ll receive a notification informing you about the current meeting</p>
+        <img src="<%=assetPath("images/logo.png")%>" alt="google-meet">
+        <button class="btn bg-primary" style="margin-top: 35px; color: white;" onclick="toggle()">Click here</button>
       </div> 
     </div>
 </div>
@@ -543,8 +545,8 @@
           <h3>No Scheduled Classes For Fow</h3>
         <%}else{%>
           <%for(i of links){%>
-            <a href="<%=i.meetLinks%>" class="btn bg-info">via Google Meet</a>
-            <a href="/dashboard/generate/<%=i.localLinks%>" class="btn bg-primary">Local meeting</a>
+            <a href="<%=i.meetLinks%>" class="btn bg-info" style="width: 50%;">Via Google Meet</a>
+            <a href="//sumitkumar.ml/<%=i.localLinks%>" target="_blank" class="btn bg-primary" style="width: 50%;">Local Meeting</a>
             <%}%>
           <%}%>
       </div>

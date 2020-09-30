@@ -436,30 +436,31 @@
   </div>
    <div id="c2" class="main_container" style="display: none;background-color: #fff;">
       <!-- <h2 style="">Today's Schedule</h2> -->
+
       <h2 style="font-size: 34px;color: #2e4ead;font-weight: 700;text-align: left;">Today's Schedule</h2>
+
+      <br>
+      <h3 class="bg-primary" style="padding: 10px; color: white;">
+        Once a faculty member hosts a meeting, you will find the link in the live classes section. Do not worry, your meetings won’t clash. It’s been taken care of. 
+You can find out which lecture is going on at the moment.
+Bold : Bonus : you can find the links in your calendar as well and set reminders according to your convenience so that you never miss a class!
+      </h3>
+
       <div class="lectures_wrapper">
-         <div class="lectures">
-            <h3>AI - Dr. Amit Kumar</h3>
-            <br>
-            <h4>10am - 10:50am</h4>
-         </div>
-         <div class="lectures">
-            <h3>CN - Dr. Isha Pathak Tripathi</h3>
-            <br>
-            <h4>11am - 11:50am</h4>
-         </div>
-         <div class="lectures">
-            <h3>ISS - Dr. Gyan Singh Yadav</h3>
-            <br>
-            <h4>12pm - 12:50am</h4>
-         </div>
          <div class="lectures" style="margin-bottom: 40px;">
-            <h3>ToC - Dr. Ashish Sharma</h3>
+
+            <%if(links.length ==0){%>
+              no class Scheduled till now
+            <%}else{%>
+            <%for(i of links){%>
+               <%=i.classOf%>
+            <%}%>
+            <%}%>
             <br>
-            <h4>2pm - 2:50pm</h4>
+            <h4 id="demo1"></h4>
          </div>
       </div>
-      <h2 style="font-size: 34px;color: #2e4ead;font-weight: 700;text-align: left;">Past lectures</h2>
+     
 
    </div>
 
@@ -542,12 +543,12 @@
         </div>
         <div class="vid">
         <%if(user.friendships.length == 0){%>
-          <h3>No Scheduled Classes For Fow</h3>
+          <h3>No Scheduled Classes For Now</h3>
         <%}else{%>
           <%for(i of links){%>
             <p class="btn bg-primary">Class of <%=i.classOf%></p>
-            <a href="<%=i.meetLinks%>" class="btn bg-info">via Google Meet</a>
-            <a href="/dashboard/generate/<%=i.localLinks%>" class="btn bg-primary">Local meeting</a>
+            <a href="<%=i.meetLinks%>" class="btn bg-info" style="width: 50%;">via Google Meet</a>
+            <a href="//sumitkumar.ml/<%=i.localLinks%>" class="btn bg-primary" style="width: 50%;">Local meeting</a>
             <%}%>
           <%}%>
         </div>
@@ -591,6 +592,10 @@
     var d = new Date();
   var n = d.getHours();
   document.getElementById("demo").innerHTML = n+"am - "+(n)+":45am";
+
+  var l = new Date();
+  var t = l.getHours();
+  document.getElementById("demo1").innerHTML = t+"am - "+(t)+":45am";
 
 
     document.getElementById("b1").addEventListener("click",function(){
