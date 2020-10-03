@@ -1,13 +1,7 @@
 *{
 	padding: 0;
 	margin: 0;
-    box-sizing: border-box;
-}
-
-body{
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
-   
+	box-sizing: border-box;
 }
 
 .wave{
@@ -54,7 +48,7 @@ form{
 
 .login-content h2{
 	margin: 15px 0;
-	color: #333;
+	color: #683aa4;
 	text-transform: uppercase;
 	font-size: 2.9rem;
 }
@@ -141,20 +135,24 @@ form{
 	padding: 0.5rem 0.7rem;
 	font-size: 1.2rem;
 	color: #555;
-	
+	font-family: 'poppins', sans-serif;
 }
 
 .input-div.pass{
 	margin-bottom: 4px;
 }
 
-a{
+p{
 	display: block;
-	text-align: right;
+	text-align: center;
 	text-decoration: none;
 	color: #999;
-	font-size: 0.9rem;
+	font-size: 1rem;
 	transition: .3s;
+}
+a{
+	color: #999;
+	text-decoration: none;
 }
 
 a:hover{
@@ -223,3 +221,20 @@ a:hover{
 		justify-content: center;
 	}
 }
+
+@media screen and (max-width:990px) {
+          .row .no-gutters {
+            display: flex;
+            flex-direction: row;
+            
+          }
+          .container .image {
+             height: 60%;
+             width: 100%;
+          }
+       }
+	@media screen and (max-width:700px) {
+	.container .image {
+			display: none;
+		}
+	}

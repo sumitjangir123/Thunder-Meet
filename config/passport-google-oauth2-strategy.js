@@ -2,13 +2,9 @@ const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
 const { OAuth2 } = google.auth
-const SCOPES = ['https://www.googleapis.com/auth/calendar'];
 const TOKEN_PATH = 'token.json';
 // Create a new instance of oAuth and set our Client ID & Client Secret.
-const oAuth2Client = new OAuth2(
-  '656640366395-5tcdds420ghq7195tfsbi04i7rduaans.apps.googleusercontent.com',
-  'hFTuBGp0WALLex6g9eh2mrCZ'
-)
+
 
 //upper part for api access
 
@@ -31,6 +27,7 @@ passport.use(new googleStrategy({
   function (accessToken, refreshToken, requestParams, profile, cb) {
 
     console.log(profile);
+
 
     //find a user 
     User.findOne({ email: profile.emails[0].value }).exec(function (err, user) {

@@ -1,44 +1,45 @@
-<div class="border  d-flex justify-content-center flex-wrap p-4">
 
-    <div class="w-75 z-depth-2 mb-4 bg-info slideInRight animated">
-            <p class="p-3">When entering your new password , please note that the password must be secure and is
-                    always more secure if you can mix numbers with letters.
-                    Once you have entered your new password and confirmed it, your password will then be reset.
-            </p>
+
+
+
+	<link rel="stylesheet" type="text/css" href="<%=assetPath("css/resetPass.css")%>">
+<body>
+	<div class="container">
+		<div class="img">
+			<img src="<%=assetPath("images/forgotPass.svg")%>">
+		</div>
+		<div class="login-content">
+			<form method="POST" action="/users/set-new-password" autocomplete="off">
+				<h2 class="title" style="color: #683aa4;">Reset Password</h2>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+                        <!-- <i class="fas fa-lock"></i> -->
+                        <svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                           <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
+                           <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+                         </svg>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Choose a password</h5>
+           		    	<input type="password" class="input" name="password">
+            	   </div>
+               </div>
+               <input type="hidden" name="token" value="<%=token%>">
+               <div class="input-div pass">
+                  <div class="i"> 
+                     <svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                     </svg>
+                  </div>
+                  <div class="div">
+                     <h5>Confirm password</h5>
+                     <input type="password" class="input" name="confirm_password">
+                  </div>
+               </div>
+               <button type="submit" class="btn">Reset</button>
+            </form>
+        </div>
     </div>
-    <div class="w-75 z-depth-2 mb-4 bg-danger p-3 animated slideInLeft">
-            <p class="">
-                    Warning : please do not refresh the page, otherwise your token may be expired.
-            </p>
-    </div>
-    <div class="border w-75 p-4 img-fluid z-depth-2">
-
-            <div class="d-flex justify-content-center ">
-                    <p class="bg-warning p-3 rounded z-depth-2">Set new password</p>
-            </div>
-            <div>
-                    <form action="/users/set-new-password" method="POST">
-
-                            <!-- email -->
-                            <div class="md-form my-5">
-                                    <i class="fas fa-lock prefix"></i>
-                                    <input type="password" name="password" id="inputIconEx1" class="form-control"
-                                            required>
-                                    <label for="inputIconEx1">Enter your password</label>
-                            </div>
-                            <input type="hidden" name="token" value="<%=token%>">
-                            <!-- password -->
-                            <div class="md-form">
-                                    <i class="fas fa-lock prefix"></i>
-                                    <input type="password" id="inputValidationEx2" name="confirm_password"
-                                            class="form-control validate" required>
-                                    <label for="inputValidationEx2" data-error="wrong" data-success="right">Confirm
-                                            password</label>
-                            </div>
-
-                            <!-- Sign In Button -->
-                            <button type="submit" id="sign-in-submit" class="btn btn-success btn-md">Change password</button>
-                    </form>
-            </div>
-    </div>
-</div>
+    <script type="text/javascript" src="<%=assetPath("js/signin.js")%>" > </script>
+</body>
+</html>

@@ -7,9 +7,6 @@ const passwordToken=new mongoose.Schema({
     token: {
         type : String
     },
-    isValid: {
-        type : Boolean
-    },
     createdAt: { type: Date, expires: '5m', default: Date.now }
 },
 {

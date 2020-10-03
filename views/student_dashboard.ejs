@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <meta name="HandheldFriendly" content="true">
-   <link rel="icon" type="image/png" href="/images/logo.png">
-	<title>Student | Thunder Meet</title>
+
    <link rel="stylesheet" href="/css/student_dashboard.css">
    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <style>
@@ -91,7 +83,7 @@
         transition: 0.5s;
       }
   </style>
-</head>
+
 <body>
 
 <div class="wrapper" id="blur">
@@ -102,7 +94,7 @@
        <div class="three"></div>
     </div>
     <div class="top_menu">
-      <div class="logo"><img src="<%=assetPath("images/logo.png")%>" style="height: 80px;width: 80px;"></div>
+      <div class="logo"><img  style="height: 60px;width: auto;" src="<%=assetPath("images/logo.svg")%>"></div>
       <!-- <ul>
         <li><a href="#">
           <i class="fas fa-search"></i></a></li>
@@ -440,11 +432,15 @@
       <h2 style="font-size: 34px;color: #2e4ead;font-weight: 700;text-align: left;">Today's Schedule</h2>
 
       <br>
-      <h3 class="bg-primary" style="padding: 10px; color: white;">
-        Once a faculty member hosts a meeting, you will find the link in the live classes section. Do not worry, your meetings won’t clash. It’s been taken care of. 
-You can find out which lecture is going on at the moment.
-Bold : Bonus : you can find the links in your calendar as well and set reminders according to your convenience so that you never miss a class!
-      </h3>
+      <blockquote class="blockquote bq-primary">
+   
+        <p class="mb-0"> Once a faculty member hosts a meeting, you will find the link in the live classes section. Do not worry, your meetings won’t clash. It’s been taken care of. 
+          You can find out which lecture is going on at the moment.
+          <br>
+          <p class="bq-title">Bonus : you can find the links in your calendar as well and set reminders according to your convenience so that you never miss a class!</p>
+          </p>
+      </blockquote>
+     
 
       <div class="lectures_wrapper">
          <div class="lectures" style="margin-bottom: 40px;">
@@ -467,7 +463,7 @@ Bold : Bonus : you can find the links in your calendar as well and set reminders
 
    <div id="c3" class="main_container" style="display: none;background-color: #fff;">
       <div class="item">
-        Content 3
+        No Assignments Till Now
       </div>
     </div>
 
@@ -475,7 +471,7 @@ Bold : Bonus : you can find the links in your calendar as well and set reminders
 
     <div id="c4" class="main_container" style="display: none;background-color: white;">
 
-      <h1 style="color: #5A5C69;" class="animated hinge">Profile</h1>
+      <h1 style="color: #5A5C69;" class="animated slideInUp faster">Profile</h1>
       <br>
       <div class="summaryCards">
         <div class="contentCard">
@@ -495,7 +491,7 @@ Bold : Bonus : you can find the links in your calendar as well and set reminders
             </small></p>
           </div>
           <div class="sideLogo">
-            <img src="<%=user.avatar%>" alt="profile-picture" class="animated zoomInUp">
+            <img src="<%=user.avatar%>" alt="profile-picture" class="animated slideInUp faster z-depth-2">
             <button id="profileUpdate" style="display: none;">Update</button>
           </div>
         </div>
@@ -758,14 +754,7 @@ Bold : Bonus : you can find the links in your calendar as well and set reminders
         $(".close").click(function(){
           $(".popup").removeClass("active");
         });
-        // $("body").click(function() {
-        //   if (!$(this.target).is('.notifications')) {
-        //     $(".notifications").removeClass("active");
-        //   }
-        //   else if (!$(this.target).is('.profile')) {
-        //     $(".profile").removeClass("active");
-        //   }
-        // }
+ 
         $('body').click(function() {
             $(".popupForm").removeClass("active");
             $(".profile").removeClass("active");
@@ -788,11 +777,6 @@ Bold : Bonus : you can find the links in your calendar as well and set reminders
           $('.wrapper').toggleClass("collapse");
           isCollapsed = true;
         });
-        // if(isCollapsed==true){
-        //   $('.wrapper').toggleClass("collapse");
-        //   isCollapsed = false;
-        // }
       });
     </script>
 </body>
-</html>

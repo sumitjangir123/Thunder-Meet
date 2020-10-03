@@ -161,7 +161,8 @@ body {
   color: #683aa4; }
 
 .carousel-item {
-  height: 100vh;
+  min-height: 300px;
+  height: auto;
   object-fit: contain;
   background: no-repeat center center scroll;
   -webkit-background-size: cover;
@@ -337,9 +338,9 @@ section img {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url(/images/contact_bg2.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: url(/images/contact_bg2.svg);
+  background-size: contain;
+  background-repeat: repeat;
   background-position: center;
   opacity: 0.8; }
 
@@ -396,7 +397,7 @@ section img {
   color: white; }
 
 .contact .contactForm {
-  width: 40%;
+  width: 100%;
   padding: 40px;
   background: #fff; }
 

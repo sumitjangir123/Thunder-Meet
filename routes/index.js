@@ -17,5 +17,6 @@ router.use("/api",require('./api'));
 router.use("/likes",require('./likes'));
 router.use("/dashboard",require('./dashboard'));
 router.use("/organizations",require('./organizations'));
+router.use("/attendance",require('./attendance'));
 //make it for outer index.js
 module.exports =router;

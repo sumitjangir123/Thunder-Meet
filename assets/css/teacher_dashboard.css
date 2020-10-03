@@ -124,7 +124,8 @@ body {
   border-bottom: 0; }
 
 .notification_dd li .notify_icon .icon {
-  background: url(/images/isha.jpg) no-repeat 0 0;
+  background: url(/images/logo.svg) no-repeat 0 0;
+  background-size: contain;
   width: 40px;
   height: 42px; }
 
@@ -522,7 +523,7 @@ body {
   display: none; }
 
 .wrapper.collapse .main_container {
-  width: 99.2708333333%;
+  display: block;
   margin-left: 70px; }
 
 #c2 .heading {
@@ -666,7 +667,8 @@ body {
   background: #2e4ead;
   display: flex;
   width: auto;
-  height: 40px;
+  height: auto;
+  padding: 10px;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;

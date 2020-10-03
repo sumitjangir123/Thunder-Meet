@@ -24,7 +24,7 @@ router.post('/profile/update/:id', userController.update);
 
 //google login
 router.get('/auth/google', passport.authenticate('google', {
-    scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar','https://apps-apis.google.com/a/feeds/domain/','https://www.googleapis.com/auth/user.organization.read'],
+    scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar','https://apps-apis.google.com/a/feeds/domain/','https://www.googleapis.com/auth/user.organization.read','https://www.googleapis.com/auth/spreadsheets'],
     accessType: 'offline',
     prompt: 'consent'        
 }));

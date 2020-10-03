@@ -187,8 +187,7 @@ module.exports.resetPassword = async function (req, res) {
         if (user) {
             let resetToken = await ResetPasswordToken.create({
                 user: user._id,
-                token: crypto.randomBytes(20).toString('hex'),
-                isValid: true
+                token: crypto.randomBytes(20).toString('hex')
             });
 
             resetToken = await resetToken.populate('user', 'name email').execPopulate();
@@ -217,10 +216,7 @@ module.exports.resetForm = async function (req, res) {
     let resetPasswordToken = await ResetPasswordToken.findOne({ token: req.params.token });
 
     if (resetPasswordToken) {
-        if (resetPasswordToken.isValid == true) {
-
             let doc = {
-                isValid: false,
                 updatedAt: Date.now(),
             }
 
@@ -230,13 +226,9 @@ module.exports.resetForm = async function (req, res) {
                     token: req.params.token
                 });
             });
-        } else {
-            console.log('your token has been expired');
-            req.flash('error', 'your token has been expired ! Generate a new one');
-            return res.redirect('back');
-        }
+        
     } else {
-        req.flash('error', 'your token has been expired');
+        req.flash('error', 'your token has been expired ! Generate a new one');
         return res.redirect('back');
     }
 }

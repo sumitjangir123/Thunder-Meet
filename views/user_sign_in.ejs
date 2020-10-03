@@ -1,126 +1,44 @@
-<!doctype html>
-<html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <meta name="HandheldFriendly" content="true">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="icon" type="image/png" href="/images/logo.png">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>Signup | Thunder Meet</title>
-    <style>
-       *{
-          padding: 0;
-          margin: 0;
-          box-sizing: border-box;
-       }
-
-       body::-webkit-scrollbar {
-         width: 0.8em;
-       }
-      
-       body::-webkit-scrollbar-track {
-         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-       }
-
-       body::-webkit-scrollbar-thumb {
-         background-color: #FC5C7D   ;
-         outline: 1px solid rgb(130, 138, 146);
-       }
-
-       body {
-         /* background: rgb(219,226,226);
-         background: #4e73df; */
-         background: #4e73df;
-         background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);
-         background: linear-gradient(to right, #FC5C7D, #6A82Fb); 
-       }
-
-      .row {
-         background: white;
-         border-radius: 30px;
-         box-shadow: 12px 12px 22px grey;
-      }
-      img {
-         border-top-left-radius: 30px;
-         border-bottom-left-radius: 30px;
-      }
-      h1 {
-         color: #683aa4;
-      }
-      p {
-         color: #683aa4;
-      }
-      .btn1 {
-         border: none;
-         outline: none;
-         height: 50px;
-         width: 100%;
-         /* background-color: black; */
-         background-color: #683aa4;
-         color: white;
-         border-radius: 4px;
-         font-weight: bold;
-      }
-      .btn1:hover {
-         background: white;
-         border: 1px solid;
-         color: #683aa4;
-       }
-
-       #no-overflow {
-          height: 600px;
-          overflow-y: auto;
-          overflow-x: hidden;
-       }
-
-       #no-overflow::-webkit-scrollbar {
-         width: 0.8em;
-       }
-      
-       #no-overflow::-webkit-scrollbar-track {
-         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-       }
-
-       #no-overflow::-webkit-scrollbar-thumb {
-         background-color: #FC5C7D   ;
-         outline: 1px solid rgb(130, 138, 146);
-       }
-    </style>
-  </head>
-  
-<section class="Form my-4 mx-5" id="login" style="display: block;">
-    <div class="container">
-       <div class="row no-gutters">
-          <div class="col-lg-5">
-             <img src="/images/doubt_image.jpg" class="img-fluid" alt="" />
-          </div>
-          <div class="col-lg-7 px-5 pt-5">
-             <h1 class="font-weight-bold py-3">THUNDER MEET</h1>
-             <form method="POST" action="/users/create_session" autocomplete="off">
-                <div class="form-row">
-                   <div class="col-lg-7">
-                      <input type="email" name="email" placeholder="Email-address" class="form-control my-3 p-4">
-                   </div>
-                </div>
-                <div class="form-row">
-                   <div class="col-lg-7">
-                      <input type="password" placeholder="Password" name="password" class="form-control my-3 p-4">
-                   </div>
-                </div>
-                <div class="form-row">
-                   <div class="col-lg-7">
-                      <button type="submit" class="btn1 mt-3 mb-5">Login</button>
-                   </div>
-                </div>
-                <a href="/users/forgotPasswordEnterMail">Forgot password?</a>
-                <p>Don't have an account yet? Get a life ! A'ight, just <a href="/users/signUp">register here</a></p>
-             </form>
-          </div>
-       </div>
+<link rel="stylesheet" type="text/css" href="<%=assetPath("css/sign_in.css")%>">
+<body>
+	<div class="container">
+		<div class="img">
+			<img src="<%=assetPath("images/bg.svg")%>">
+		</div>
+		<div class="login-content">
+			<form method="POST" action="/users/create_session" autocomplete="off">
+				<img src="/images/avatar.svg">
+            <h2 class="title" style="color: #683aa4;">Login Portal</h2>
+            <br>
+           		<div class="input-div one">
+           		   <div class="i">
+                          <!-- <i class="fas fa-user"></i> -->
+                          <svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                           <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                         </svg>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Email Address</h5>
+           		   		<input type="text" class="input" name="email">
+           		   </div>
+           		</div>
+           		<div class="input-div pass" style="margin-top: 30px;">
+           		   <div class="i"> 
+                        <!-- <i class="fas fa-lock"></i> -->
+                        <svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-lock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                           <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
+                           <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+                         </svg>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Password</h5>
+           		    	<input type="password" class="input" name="password">
+            	   </div>
+            	</div>
+            	<a href="/users/forgotPasswordEnterMail">Forgot Password?</a>
+               <button type="submit" class="btn">Login</button>
+            </form>
+        </div>
     </div>
- </section>
+    <script type="text/javascript" src="<%=assetPath("js/signin.js")%>"></script>
+</body>
+

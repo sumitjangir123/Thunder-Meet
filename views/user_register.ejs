@@ -1,200 +1,72 @@
-<!doctype html>
-<html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <meta name="HandheldFriendly" content="true">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css" href="/css/register.css">
 
-    <link rel="icon" type="image/png" href="/images/logo.png">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>Signup | Thunder Meet</title>
-    <style>
-       *{
-          padding: 0;
-          margin: 0;
-          box-sizing: border-box;
-       }
-
-       body::-webkit-scrollbar {
-         width: 0.8em;
-       }
-      
-       body::-webkit-scrollbar-track {
-         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-       }
-
-       body::-webkit-scrollbar-thumb {
-         background-color: #FC5C7D   ;
-         outline: 1px solid rgb(130, 138, 146);
-       }
-
-       body {
-         /* background: rgb(219,226,226);
-         background: #4e73df; */
-         background: #4e73df;
-         background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);
-         background: linear-gradient(to right, #FC5C7D, #6A82Fb); 
-       }
-
-      .row {
-         background: white;
-         border-radius: 30px;
-         box-shadow: 12px 12px 22px grey;
-      }
-      img {
-         border-top-left-radius: 30px;
-         border-bottom-left-radius: 30px;
-      }
-      h1 {
-         color: #683aa4;
-      }
-      p {
-         color: #683aa4;
-      }
-      .btn1 {
-         border: none;
-         outline: none;
-         height: 50px;
-         width: 100%;
-         /* background-color: black; */
-         background-color: #683aa4;
-         color: white;
-         border-radius: 4px;
-         font-weight: bold;
-      }
-      .btn1:hover {
-         background: white;
-         border: 1px solid;
-         color: #683aa4;
-       }
-
-       #no-overflow {
-          height: 600px;
-          overflow-y: auto;
-          overflow-x: hidden;
-       }
-
-       #no-overflow::-webkit-scrollbar {
-         width: 0.8em;
-       }
-      
-       #no-overflow::-webkit-scrollbar-track {
-         box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-       }
-
-       #no-overflow::-webkit-scrollbar-thumb {
-         background-color: #FC5C7D   ;
-         outline: 1px solid rgb(130, 138, 146);
-       }
-    </style>
-  </head>
-  
 <%if(locals.user){%>
-    <section id="info_form" class="Form my-4 mx-5" style="display: block;">
-        <div class="container">
-           <div class="row no-gutters">
-              <div class="col-lg-5">
-                 <img src="/images/thank_you.jpg" class="img-fluid" alt="" />
-              </div>
-              <div id="no-overflow" class="col-lg-7 px-5 pt-5">
-                 <h1 class="font-weight-bold py-3">Hi <%=locals.user.name%> ! Registration Form</h1>
-                 <form id="details" method="POST" action="/users/create_user" autocomplete="false">
-                    <br>
-                    <div class="form-row">
-                       <div class="col-lg-7">
-                          <input type="text" placeholder="Contact Number" name="contact" class="form-control my-3 p-4" required>
-                       </div>
-                    </div>
+<div class="container">
+   <div class="image">
+      <img src="/images/forms2.svg" alt="formjpeg">
+   </div>
+   <div class="form">
+      <h3>Let's get to know you <%=locals.user.name%></h3>
+      <form id="details" method="POST" action="/users/create_user" autocomplete="false">
+         <div class="row">
+            <label for="Contact Number">Contact Number</label>
+            <input type="text" placeholder="Contact Number" name="contact" min="1000000000" max="9999999999" required>
+         </div>
+         <div class="row">
+            <label for="Organisation">Your organisation</label>
+            <input type="text" placeholder="organization" value="<%=locals.user.org%>" name="org" disabled required>
+         </div>
+         <div class="row">
+            <label for="Access type">Access type</label>
+            <br>
+            <label style="display: inline;">
+               <input type="radio" name="same" value="student" checked> &nbsp;Student
+            </label>
 
-                  
-                  <p>Your College Organization</p>
-                  <div class="form-row">
-                     <div class="col-lg-7">
-                        <input type="text" placeholder="organization" value="<%=locals.user.org%>" name="org" class="form-control mb-3 p-4" disabled required>
-                     </div>
-                  </div>
-                  
-
-                  <p>Access Type</p>
-
-                  <label class="radio-inline">
-                    <input type="radio" name="same"  value="student" checked> &nbsp;Student
-                 </label>
-
-                 &nbsp;&nbsp;
-                 <label class="radio-inline">
-                   <input type="radio" name="same" value="teacher"> &nbsp;Teacher
-                 </label>
-
-                 <div class="form-row">
-                  <div class="col-lg-7">
-                     <input type="email"  placeholder="Email-address" value="<%=locals.user.email%>" class="form-control my-3 p-4" disabled required>
-                  </div>
-               </div>
-                  
-               <div class="form-row">
-                  <div class="col-lg-7">
-                     <input type="password" name="password" placeholder="choose a password" class="form-control my-3 p-4" required>
-                  </div>
-               </div>
-               <div class="form-row">
-                  <div class="col-lg-7">
-                     <input type="password" name="confirm_password" placeholder="confirm your password" class="form-control my-3 p-4" required>
-                  </div>
-               </div>
-
-                    <p>Enter Your Institute Access Token If You Are A Teacher <br> Else Leave It</p>
-
-                    <div class="form-row">
-                     <div class="col-lg-7">
-                        <input type="text" placeholder="AccessToken eg. a2bkYRxwdsL"  name="AccessToken" class="form-control my-3 p-4">
-                     </div>
-                  </div>
-
-
-                  <p>Also Fill The Details Given Below If You Are A Student</p>
-                    <div class="form-row">
-                       <div class="col-lg-7">
-                          <input type="text" placeholder="Roll Number / Id" value="Roll  No." name="roll" class="form-control  p-4">
-                       </div>
-                    </div>
-                    <div class="form-row">
-                       <div class="col-lg-7">
-                          <input type="number" placeholder="Year" name="year" class="form-control my-3 p-4" >
-                       </div>
-                    </div>
-                    <div class="form-row">
-                       <div class="col-lg-7">
-                          <select class="form-control"  name="branch" class="form-control my-3 p-4">
-                           <option>CSE</option>
-                           <option>ECE</option>
-                           <option>MECH</option>
-                           <option>CIVIL</option>
-                           <option>CHEMICAL</option>
-                           <option>OTHER</option>
-                         </select>
-
-                       </div>
-                    </div>
-                  
-                  
-                   
-
-                    
-                    <div class="form-row">
-                       <div class="col-lg-7">
-                          <button type="submit" id="info_submit" class="btn1 mt-3 mb-5">
-                             Submit
-                          </button>
-                       </div>
-                    </div>
-                 </form>  
-              </div>
-           </div>
-        </div>
-     </section>
-    <%}%>
+            &nbsp;&nbsp;
+            <label style="display: inline;">
+               <input type="radio" name="same" value="teacher"> &nbsp;Teacher
+            </label>
+         </div>
+         <div class="row">
+            <label for="Email">Email address</label>
+            <input type="email" placeholder="Email-address" value="<%=locals.user.email%>" disabled required>
+         </div>
+         <div class="row">
+            <label for="Password">Password</label>
+            <input type="password" name="password" placeholder="choose a password" required>
+         </div>
+         <div class="row">
+            <label for="Confirm Password">Confirm Password</label>
+            <input type="password" name="confirm_password" placeholder="confirm your password" required>
+         </div>
+         <div class="row">
+            <label for="AccessToken">If you are a teacher</label>
+            <input type="text" placeholder="Enter Access Token ex - a2bkYRxwdsL" name="AccessToken">
+         </div>
+         <div class="row">
+            <label for="Roll No / ID">ID</label>
+            <input type="text" placeholder="Roll Number / Id" value="" name="roll">
+         </div>
+         <div class="row">
+            <label for="Year">Year</label>
+            <input type="number" placeholder="Year ex - 1,2,3,4" name="year">
+         </div>
+         <div class="row">
+            <label for="Branch">Branch</label>
+            <select name="branch">
+               <option>CSE</option>
+               <option>ECE</option>
+               <option>MECH</option>
+               <option>CIVIL</option>
+               <option>CHEMICAL</option>
+               <option>OTHER</option>
+            </select>
+         </div>
+         <div class="row">
+            <button type="submit" id="info_submit" class="btn">Submit</button>
+         </div>
+      </form>
+   </div>
+</div>
+<%}%>
