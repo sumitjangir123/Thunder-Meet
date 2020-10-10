@@ -16,11 +16,19 @@ const Friends = require("../models/friendship");
 const crypto = require("crypto");
 
 module.exports.student = async function (req, res) {
-    let user = await User.findById(req.user._id).populate("friendships");
+
+    if(!req.user){
+        req.flash("error","Session Timeout ! Login Again ");
+        return res.redirect("/");
+    }
+    let classes = await Friends.find({
+        branch: req.user.branch,
+        year: req.user.year
+    }).sort('-createdAt');
 
     return res.render('student_dashboard', {
         title: "student section",
-        links: user.friendships
+        links: classes
     })
 }
 
@@ -40,7 +48,7 @@ module.exports.teacher = async function (req, res) {
 
 
     //fetching class info
-    let user = await User.findById(req.user._id).populate("friendships");
+    let classes = await Friends.find({moderator:req.user.email}).sort('-createdAt');
 
     if (org.length != 0) {
 
@@ -56,7 +64,7 @@ module.exports.teacher = async function (req, res) {
             title: "admin section",
             students: users,
             org: org,
-            links: user.friendships
+            links: classes
         })
 
     } else {
@@ -69,11 +77,28 @@ module.exports.teacher = async function (req, res) {
 
 module.exports.createClass = async function (req, res) {
 
+    var date1 = req.body.date + "T" + (req.body.time).split(":")[0] + ":00" + ":30";
+    var date2 = req.body.date + "T" + (req.body.time).split(":")[0] + ":45" + ":30";
+
+
+    var x = new Date(req.body.date + "T" + (req.body.time).split(":")[0] + ":00" + ":30");
+    var y = new Date(req.body.date + "T" + (req.body.time).split(":")[0] + ":45" + ":30");
+
+
+    var end1 = req.body.date + "T" + (x.getUTCHours()) + ":" + (x.getUTCMinutes()) + ":00" + ".000Z";
+    var end2 = req.body.date + "T" + (y.getUTCHours()) + ":" + (y.getUTCMinutes()) + ":00" + ".000Z";
+
+
     let org = await Org.findOne({
         token: req.user.token
     });
 
-    
+    if (org == undefined) {
+        req.flash("error", "sorry, your organisation is not defined");
+        return res.redirect("/");
+    }
+
+    //fetching all the users of that class
     let users = await User.find({
         access: "student",
         org: org.organization,
@@ -81,51 +106,16 @@ module.exports.createClass = async function (req, res) {
         branch: req.body.branch
     })
 
+    //if no. of students =0
+    if (users.length == 0) {
+        req.flash("error", "can't create a class without students");
+        return res.redirect("back");
+    }
 
 
-        let CheckUser= await User.findOne({
-            access : "student",
-            org : org.organization,
-            year : req.body.year,
-            branch : req.body.branch
-        })
-        .populate("friendships");
 
-        for(i of CheckUser.friendships){
-            
-            if(i.classOf!="undefined"){
-                req.flash("error","sorry "+ i.classOf+ " class is live now");
-                req.flash("error","according to the student "+CheckUser.email);
-                return res.redirect("back");
-            }
-        }
-       
-
-
-        //removing all ids from users
-        for(i of users){
-            await User.findOneAndUpdate({
-                email: i.email
-            }, {
-                friendships: [],
-                totalClass: i.totalClass+1
-            })
-        }
-        //removing all ids from teacher
-    await User.findOneAndUpdate({
-        email: req.user.email
-    }, {
-        friendships: []
-    })
-
-
-    let temp_teacher = await User.findOneAndUpdate({
-        email: req.user.email
-    }, {
-        totalClass: req.user.totalClass + 1
-    })
-
-    const oAuth2Client = new OAuth2(
+    //setting details for teacher
+    let oAuth2Client = new OAuth2(
         '656640366395-5tcdds420ghq7195tfsbi04i7rduaans.apps.googleusercontent.com',
         'hFTuBGp0WALLex6g9eh2mrCZ'
     )
@@ -134,26 +124,79 @@ module.exports.createClass = async function (req, res) {
         refresh_token: req.user.refreshToken,
     });
 
-
-
-    var link = null;
     // Create a new calender instance.
-    const calendar = google.calendar({ version: 'v3', auth: oAuth2Client })
-
-    // Create a new event start date instance for temp uses in our calendar.
-    const eventStartTime = new Date()
+    let calendar = google.calendar({ version: 'v3', auth: oAuth2Client })
 
 
-    eventStartTime.setDate(eventStartTime.getDate())
+    //checking whether teacher is budy or not
+    let result = await calendar.events.list({
+        calendarId: 'primary',
+        timeMin: end1,
+        timeMax: end2,
+        maxResults: 1,
+        singleEvents: true,
+        orderBy: 'startTime',
+    });
 
-    console.log(eventStartTime);
-    // Create a new event end date instance for temp uses in our calendar.
-    const eventEndTime = new Date()
-    eventEndTime.setDate(eventEndTime.getDate())
-    eventEndTime.setMinutes(eventEndTime.getMinutes() + 45)
+    let events = result.data.items;
+    if (events.length) {
+        req.flash("error", "Sorry, You Are Busy With " + events[0].summary);
+        return res.redirect("back");
+    }
+
+    //checking end
 
 
-    // Create a dummy event for temp uses in our calendar
+
+
+    //checking started for students
+    oAuth2Client.setCredentials({
+        refresh_token: users[0].refreshToken,//a random user
+    });
+
+    // Create a new calender instance for a student to check
+    calendar = google.calendar({ version: 'v3', auth: oAuth2Client })
+
+    //checking whether student is busy or not
+    result = await calendar.events.list({
+        calendarId: 'primary',
+        timeMin: end1,
+        timeMax: end2,
+        maxResults: 1,
+        singleEvents: true,
+        orderBy: 'startTime',
+    });
+
+    events = result.data.items;
+    if (events.length) {
+        req.flash("error", "Sorry, Students Are Busy With " + events[0].summary + " | According to the user " + users[0].email);
+        return res.redirect("back");
+    }
+
+    //checking end for students
+
+
+
+
+    //update teacher's class info
+    await User.findOneAndUpdate({
+        email: req.user.email
+    }, {
+        totalClass: req.user.totalClass + 1
+    })
+
+
+
+    // Create a new event start date instance for teacher in their calendar.
+    const eventStartTime = new Date();
+    eventStartTime.setDate((req.body.date).split("-")[2]);
+    const eventEndTime = new Date();
+    eventEndTime.setDate((req.body.date).split("-")[2]);
+    eventEndTime.setMinutes(eventStartTime.getMinutes() + 45);
+
+
+
+    // Create a dummy event for temp users in our calendar
     const event = {
         summary: "next class of " + req.body.subject + " - " + req.user.name,
         location: "Jawahar Lal Nehru Marg, Jhalana Gram, Malviya Nagar, Jaipur, Rajasthan 302017",
@@ -168,171 +211,101 @@ module.exports.createClass = async function (req, res) {
             }
         },
         start: {
-            dateTime: eventStartTime,
+            dateTime: date1,
             timeZone: 'Asia/Kolkata',
         },
         end: {
-            dateTime: eventEndTime,
+            dateTime: date2,
             timeZone: 'Asia/Kolkata',
         },
     }
 
-    // Check if we a busy and have an event on our calendar for the same time.
-    calendar.freebusy.query(
-        {
-            resource: {
-                timeMin: eventStartTime,
-                timeMax: eventEndTime,
-                timeZone: 'Asia/Kolkata',
-                items: [{ id: 'primary' }],
-            },
-        },
-        (err, res) => {
+
+    //IMPORTANT
+    //switching to the teacher again
+    oAuth2Client.setCredentials({
+        refresh_token: req.user.refreshToken,
+    });
+
+    // Create a new calender instance.
+    calendar = google.calendar({ version: 'v3', auth: oAuth2Client })
+
+    calendar.events.insert(
+        { calendarId: 'primary', conferenceDataVersion: '1', resource: event },
+        (err, temp) => {
+            // Check for errors and log them if they exist.
+            if (err) return console.error('Error Creating Calender Event:', err)
+            // Else log that the event was created.
+            let link = temp.data.hangoutLink;
+
+             Friends.create({
+                startFrom:req.body.date +"T"+req.body.time,
+                moderator:req.user.email,
+                meetLinks: temp.data.hangoutLink,
+                localLinks: crypto.randomBytes(20).toString('hex'),
+                classOf: req.body.subject,
+                branch:req.body.branch,
+                year:req.body.year
+            })
 
 
-            // Check for errors in our query and log them if they exist.
-            if (err) return console.error('Free Busy Query Error: ', err)
 
-            // Create an array of all events on our calendar during that time.
-            const eventArr = res.data.calendars.primary.busy
+            //updating the total class values 
+            users.forEach(function(olx){
+                olx.totalClass=olx.totalClass+1;
+                olx.save()
+            });
+            
+           
+            //starting users source link assignment
+            for (user of users) {
 
-            // Check if event array is empty which means we are not busy
-            if (eventArr.length === 0)
-                // If we are not busy create a new calendar event.
+                // Create a new instance of oAuth and set our Client ID & Client Secret.
+                oAuth2Client.setCredentials({
+                    refresh_token: user.refreshToken,
+                });
+
+                // Create a new calender instance.
+                calendar = google.calendar({ version: 'v3', auth: oAuth2Client })
+
+
+                // Create a dummy event for temp uses in our calendar
+                const event = {
+                    summary: "next class of " + req.body.subject + " - " + req.user.name,
+                    location: "Jawahar Lal Nehru Marg, Jhalana Gram, Malviya Nagar, Jaipur, Rajasthan 302017",
+                    description: "by Thunder Meet : "+link,
+                    colorId: 1,
+                    source:{
+                        title:"Class Link",
+                        url:link
+                    },
+                    start: {
+                        dateTime: date1,
+                        timeZone: 'Asia/Kolkata',
+                    },
+                    end: {
+                        dateTime: date2,
+                        timeZone: 'Asia/Kolkata',
+                    },
+                }
+
                 return calendar.events.insert(
-                    { calendarId: 'primary', conferenceDataVersion: '1', resource: event },
-                    (err, temp) => {
+                    { calendarId: 'primary', sendUpdates: 'all', resource: event },
+                    err => {
                         // Check for errors and log them if they exist.
                         if (err) return console.error('Error Creating Calender Event:', err)
                         // Else log that the event was created.
-                        let link = temp.data.hangoutLink;
-
-
-                        let friend = Friends.create({
-                            meetLinks: temp.data.hangoutLink,
-                            localLinks: crypto.randomBytes(20).toString('hex'),
-                            classOf: req.body.subject
-                        })
-
-
-
-                        // for saving the links to every student
-                        users.forEach(function(olx){
-                            friend.then((peep)=>{
-                                olx.friendships.push(peep);
-                                olx.save();
-                            });  
-
-                        });
-
-
-
-                    
-                        //also saving for the teacher
-                        friend.then((peep) => {
-                            temp_teacher.friendships.push(peep);
-                            temp_teacher.save();
-                        });
-
-                        //starting users source link assignment
-
-                        for (user of users) {
-
-                            // Create a new instance of oAuth and set our Client ID & Client Secret.
-                            const oAuth2Client = new OAuth2(
-                                '656640366395-5tcdds420ghq7195tfsbi04i7rduaans.apps.googleusercontent.com',
-                                'hFTuBGp0WALLex6g9eh2mrCZ'
-                            )
-
-                            oAuth2Client.setCredentials({
-                                refresh_token: user.refreshToken,
-                            });
-
-
-                            // Create a new calender instance.
-                            const calendar = google.calendar({ version: 'v3', auth: oAuth2Client })
-
-                            // Create a new event start date instance for temp uses in our calendar.
-                            const eventStartTime = new Date()
-
-
-                            eventStartTime.setDate(eventStartTime.getDate())
-
-                            console.log(eventStartTime);
-                            // Create a new event end date instance for temp uses in our calendar.
-                            const eventEndTime = new Date()
-                            eventEndTime.setDate(eventEndTime.getDate())
-                            eventEndTime.setMinutes(eventEndTime.getMinutes() + 45)
-
-
-                            // Create a dummy event for temp uses in our calendar
-                            const event = {
-                                summary: "next class of " + req.body.subject + " - " + req.user.name,
-                                location: "Jawahar Lal Nehru Marg, Jhalana Gram, Malviya Nagar, Jaipur, Rajasthan 302017",
-                                description: "by Thunder Meet : thethunderbirdus@gmail.com",
-                                colorId: 1,
-                                source: {
-                                    title: "Class Link of " + req.body.subject,
-                                    url: link
-                                },
-                                start: {
-                                    dateTime: eventStartTime,
-                                    timeZone: 'Asia/Kolkata',
-                                },
-                                end: {
-                                    dateTime: eventEndTime,
-                                    timeZone: 'Asia/Kolkata',
-                                },
-                            }
-
-                            // Check if we a busy and have an event on our calendar for the same time.
-                            calendar.freebusy.query(
-                                {
-                                    resource: {
-                                        timeMin: eventStartTime,
-                                        timeMax: eventEndTime,
-                                        timeZone: 'Asia/Kolkata',
-                                        items: [{ id: 'primary' }],
-                                    },
-                                },
-                                (err, res) => {
-
-
-                                    // Check for errors in our query and log them if they exist.
-                                    if (err) return console.error('Free Busy Query Error: ', err)
-
-                                    // Create an array of all events on our calendar during that time.
-                                    const eventArr = res.data.calendars.primary.busy
-
-                                    // Check if event array is empty which means we are not busy
-                                    if (eventArr.length === 0)
-                                        // If we are not busy create a new calendar event.
-                                        return calendar.events.insert(
-                                            { calendarId: 'primary', sendUpdates: 'all', resource: event },
-                                            err => {
-                                                // Check for errors and log them if they exist.
-                                                if (err) return console.error('Error Creating Calender Event:', err)
-                                                // Else log that the event was created.
-                                                return console.log('Calendar event successfully created.')
-                                            }
-                                        )
-
-                                    // If event array is not empty log that we are busy.
-                                    return console.log(`Sorry I'm busy...`)
-                                }
-                            )
-                        }
-                        //end of users source link assignment
-                        return console.log('Calendar event successfully created.');
+                        return console.log('Calendar event successfully created.')
                     }
                 )
 
-            return console.log(`Sorry I'm busy...`)
+            }
+
         }
     )
 
-    req.flash("success", users.length + " students will be informed for the class");
-    return res.redirect("back");
+req.flash("success", users.length + " students will be informed for the class");
+return res.redirect("back");
 }
 
 

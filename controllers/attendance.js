@@ -12,7 +12,6 @@ const Org = require("../models/organization");
 
 module.exports.takeAttendance = async function (req, res) {
 
-  console.log(res);
     let user = await User.findOne({email:req.query.name});
     let org = await Org.findOne({token:user.token});
 
@@ -26,29 +25,56 @@ module.exports.takeAttendance = async function (req, res) {
   });
 
 
-    let attendance= Attendance.create({
-        teacherId: req.query.name,
-        sheetId: req.query.sheetId
-    })
 
-    const sheets = google.sheets({version: 'v4', auth:oAuth2Client});
-    sheets.spreadsheets.values.get({
-      spreadsheetId: req.query.sheetId,
-      range:'A1:D4'
-    }, (err, res) => {
-      if (err) return console.log('The API returned an error: ' + err);
+
+  const drive = google.drive({version: 'v3', auth:oAuth2Client});
+
+  var fileMetadata = {
+    'name': 'thunderhithunder.jpg'
+  };
+  var media = {
+    mimeType: 'image/jpeg',
+    body: fs.createReadStream("assets/images/image.jpg")
+  };
+  drive.files.create({
+    resource: fileMetadata,
+    media: media,
+    fields: 'id'
+  }, function (err, file) {
+    if (err) {
+      // Handle error
+      console.error(err);
+    } else {
+      console.log('File Id: ', file.data.id);
+    }
+  });
+
+
+
+
+    // let attendance= Attendance.create({
+    //     teacherId: req.query.name,
+    //     sheetId: req.query.sheetId
+    // })
+
+    // const sheets = google.sheets({version: 'v4', auth:oAuth2Client});
+    // sheets.spreadsheets.values.get({
+    //   spreadsheetId: req.query.sheetId,
+    //   range:'A1:D4'
+    // }, (err, res) => {
+    //   if (err) return console.log('The API returned an error: ' + err);
       
-      const rows = res.data.values;
-      console.log(rows);
-      if (rows.length) {
-        rows.map((row) => {
-          console.log(`${row[0]}, ${row[2]}`);
-        });
+    //   const rows = res.data.values;
+    //   console.log(rows);
+    //   if (rows.length) {
+    //     rows.map((row) => {
+    //       console.log(`${row[0]}, ${row[2]}`);
+    //     });
 
-        req.flash("success","Attendance Fetched Successfully");
-      } else {
-        console.log('No data found.');
-      }
-    });
+    //     req.flash("success","Attendance Fetched Successfully");
+    //   } else {
+    //     console.log('No data found.');
+    //   }
+    // });
 
 }

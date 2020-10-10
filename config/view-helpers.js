@@ -15,6 +15,7 @@ module.exports = (app) => {
                 }
                 return '/' + filePath;
             }
+            
             if(filePath.split('.').pop()=="mp4"){
                 console.log(filePath);
                 return '/' + filePath;

@@ -103,7 +103,7 @@ module.exports.create_user =async function (req, res) {
             org.teachers.push(user);
             org.save();
 
-            req.flash("success"," Hi "+req.user.name + ", now you are a registered teacher of, " + org.name);
+            req.flash("success"," Hi "+req.user.name + ", now you are a registered teacher of " + org.name);
             return res.redirect("/");
             
         }else{
@@ -126,9 +126,13 @@ module.exports.createSession = function (req, res) {
     
     if(!req.user.registered){
         req.flash('warning', 'First Things First Pls Register');
+        return res.redirect('/');
+    }else{
+        req.flash('success', 'WELCOME '+ req.user.name);
+        return res.redirect('/');
     }
     
-    return res.redirect('/')
+    
 }
 
 //to sign out the user

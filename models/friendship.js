@@ -1,7 +1,18 @@
 const mongoose = require('mongoose');
 
 const friendshipSchema = new mongoose.Schema({
-    // the user who sent this request
+    branch:{
+        type:String
+    }
+    ,year:{
+        type:String
+    },
+    startFrom:{
+        type:String
+    },
+    moderator:{
+        type:String
+    },
     classOf:{
         type:String
     },
@@ -11,7 +22,7 @@ const friendshipSchema = new mongoose.Schema({
     localLinks:{
         type:String
     },
-    createdAt_1: { type: Date, expires: '45m', default: Date.now }
+    createdAt: { type: Date, expires: '2880m', default: Date.now }
 },{
     timestamps: true
 });

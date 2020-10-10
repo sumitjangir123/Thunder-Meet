@@ -33,7 +33,7 @@ module.exports.home = async function (req, res) {
         }).populate('user');
       
      
-
+  
         return res.render('home', {
             post_list: post_list,
             users_list: users,

@@ -12,13 +12,16 @@ module.exports.register=async function(req,res){
 
 module.exports.instituteDetails=async function(req,res){
 
+    let check= await Organization.findOne({organization:req.body.organization});
+    if(check){
+        req.flash('error',"Your organization is already registered ! by "+ check.admin + " "+check.address);
+        return res.redirect("/");
+    }
     
     req.body.token=crypto.randomBytes(20).toString('hex');
     
     let org = await Organization.create(req.body);
 
-
-    console.log(org);
 
     if (org) {
         let job = queue.create('orgQueue', org).save(function (err) {
@@ -28,7 +31,7 @@ module.exports.instituteDetails=async function(req,res){
         })
 
         req.flash('success', 'check your email account, your institute key is generated !');
-        return res.redirect('back');
+        return res.redirect('/');
 
     }
     return res.redirect("/");

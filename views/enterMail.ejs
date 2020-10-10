@@ -1,91 +1,28 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="HandheldFriendly" content="true">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="icon" type="image/png" href="/images/logo.png">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <title>Forgot Password | Thunder Meet</title>
-    <style>
-      *{
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      body {
-        background: rgb(219,226,226);
-        background: #4e73df;
-      }
-
-    .row {
-        background: white;
-        border-radius: 30px;
-        box-shadow: 12px 12px 22px grey;
-    }
-    img {
-        border-top-left-radius: 30px;
-        border-bottom-left-radius: 30px;
-    }
-    h1 {
-        color: #683aa4;
-    }
-    p {
-        color: #683aa4;
-    }
-    .btn1 {
-        border: none;
-        outline: none;
-        height: 50px;
-        width: 100%;
-        /* background-color: black; */
-        background-color: #683aa4;
-        color: white;
-        border-radius: 4px;
-        font-weight: bold;
-    }
-    .btn1:hover {
-        background: white;
-        border: 1px solid;
-        color: #683aa4;
-      }
-  </style>
-  </head>
-  <body>
-
-  <section class="Form my-4 mx-5">
-    <div class="container">
-        <div class="row no-gutters">
-          <div class="col-lg-5">
-              <img src="<%=assetPath("images/contact_bg.jpg")%>" class="img-fluid" alt="" />
-          </div>
-          <div class="col-lg-7 px-5 pt-5">
-              <h1 class="font-weight-bold py-3">Forgot your password?</h1>
-              <p>We get it, stuff happens. Just enter your email address below and we'll send you a link to reset your password!</p>
-              <form action="/users/reset-password" method="post">
-                <div class="form-row">
-                    <div class="col-lg-7">
-                      <input type="email" name="email" placeholder="Email-address" class="form-control my-3 p-4">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-lg-7">
-                      <input type="submit" class="btn1 mt-3 mb-5" />
-                    </div>
-                </div>
-              </form>
-          </div>
+	<link rel="stylesheet" type="text/css" href="<%=assetPath("css/forgotPass.css")%>">
+<body>
+	<div class="container">
+		<div class="img">
+			<img src="<%=assetPath("images/bg.svg")%>">
+		</div>
+		<div class="login-content">
+			<form action="/users/reset-password" method="post" autocomplete="off">
+				<img src="/images/avatar.svg">
+        <h2 class="title">Forgot your password?</h2>
+        <p>Stuff happens, we get it. Just enter your email address below and we'll send you a link to reset your password!</p>
+        <br>
+           		<div class="input-div one">
+                 &nbsp; 
+                  <div class="div">
+           		   		<h5>Email Address</h5>
+           		   		<input type="text" class="input" name="email">
+           		   </div>
+           		</div>
+           		
+            	
+               <button type="submit" class="btn">Submit</button>
+            </form>
         </div>
     </div>
-  </section>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-  </body>
+    <script type="text/javascript" src="<%=assetPath("js/signin.js")%>"></script>
+</body>
 </html>
