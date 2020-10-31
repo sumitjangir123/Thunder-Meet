@@ -1,73 +1,73 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <meta name="HandheldFriendly" content="true">
-      
-      <link rel="icon" type="image/png" href="/images/logo.png">
 
-      <link rel="stylesheet" href="<%=assetPath("css/stackpathbootstrap.css")%>">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <meta name="HandheldFriendly" content="true">
 
-      <link rel="stylesheet" href="/css/main.css" />
+   <link rel="stylesheet" href="<%=assetPath("css/stackpathbootstrap.css")%>">
 
-   </head>
+   <link rel="stylesheet" href="/css/main.css" />
 
-   <body>
+</head>
 
-      <!-- Top Navbar begins-->
+<body onscroll="myFunction()">
 
-      <nav class="navigation">
-         <div class="content">
-            <div class="tm-title"><img src="/images/logo.svg" alt="logo"></div>
-        
-            <div class="navigation-links">
-               <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#need">Features</a></li>
-                  <li><a href="#about-us">Need</a></li>
-                  <li><a href="#founders">Founders</a></li>
-                  <li><a href="#end">Contact Us</a></li>
+   <!-- Top Navbar begins-->
+
+   <nav class="navigation" >
+      <div class="content">
+         <div class="tm-title animated faster tada"><img style="height: 50px; padding: 10px;" alt="logo"
+               src="<%=assetPath("images/logo.svg")%>"></div>
+
+         <div class="navigation-links animated faster" id="bar">
+            <ul>
+               <li><a href="#">Home</a></li>
+               <li><a href="#need">Features</a></li>
+               <li><a href="#about-us">Need</a></li>
+               <li><a href="#founders">Founders</a></li>
+               <li><a href="#end">Contact Us</a></li>
 
 
-                  <%if(locals.user && locals.user.access=="student"){%>
-                     <li>
-                        <a href="/dashboard/student" id="login-button">Dashboard 
-                        </a>
-                     </li>
-                     <li>
-                        <a href="users/SignOut" id="login-button">Logout
-                        </a>
-                     </li>
-                     <%}else if(locals.user && locals.user.access=="teacher"){%>
-                        <li>
-                           <a href="/dashboard/teacher" id="signup-button">
- Dashboard 
-                           </a>
-                        </li>
-                        <li>
-                           <a href="users/SignOut" id="login-button">Logout
-                           </a>
-                        </li>
-                     <%}else if(locals.user){%>
-                        <li >
-                           <a href="users/signIn" id="login-button">
-                              Register 
-                           </a>
-                        </li>
-                     <%}else {%>
-                      
-                        <li >
-                           <a href="users/signIn" id="login-button">Login 
-                           </a>
-                        </li>
+               <%if(locals.user && locals.user.access=="student"){%>
+               <li>
+                  <a href="/dashboard/student" id="login-button">Dashboard
+                  </a>
+               </li>
+               <li>
+                  <a href="users/SignOut" id="login-button">Logout
+                  </a>
+               </li>
+               <%}else if(locals.user && locals.user.access=="teacher"){%>
+               <li>
+                  <a href="/dashboard/teacher" id="signup-button">
+                     Dashboard
+                  </a>
+               </li>
+               <li>
+                  <a href="users/SignOut" id="login-button">Logout
+                  </a>
+               </li>
+               <%}else if(locals.user){%>
+               <li>
+                  <a href="users/signIn" id="login-button">
+                     Register
+                  </a>
+               </li>
+               <%}else {%>
 
-                        <li>
-                           <a href="users/signUp" id="signup-button">Sign Up 
-                           </a>
-                        </li>
-                     <%}%>
+               <li>
+                  <a href="users/signIn" id="login-button">Login
+                  </a>
+               </li>
+
+               <li>
+                  <a href="users/signUp" id="signup-button">Sign Up
+                  </a>
+               </li>
+               <%}%>
 
 
 
@@ -84,42 +84,42 @@
             <div class="navigation-links" id="smallDevices">
                <ul>
                   <%if(locals.user && locals.user.access=="student"){%>
-                     <li>
-                        <a href="/dashboard/student" id="login-button">Dashboard 
-                        </a>
-                     </li>
-                     <li>
-                        <a href="users/SignOut" id="login-button">SignOut 
-                        </a>
-                     </li>
-                     <%}else if(locals.user && locals.user.access=="teacher"){%>
-                        <li>
-                           <a href="/dashboard/teacher" id="signup-button">
-                              Dashboard 
-                           </a>
-                        </li>
-                        <li>
-                           <a href="users/SignOut" id="login-button">SignOut
-                           </a>
-                        </li>
-                     <%}else if(locals.user){%>
-                        <li >
-                           <a href="users/signIn" id="login-button">
-                              Register 
-                           </a>
-                        </li>
-                     <%}else {%>
-                      
-                        <li >
-                           <a href="users/signIn" id="login-button">Login 
-                           </a>
-                        </li>
+               <li>
+                  <a href="/dashboard/student" id="login-button">Dashboard
+                  </a>
+               </li>
+               <li>
+                  <a href="users/SignOut" id="login-button">SignOut
+                  </a>
+               </li>
+               <%}else if(locals.user && locals.user.access=="teacher"){%>
+               <li>
+                  <a href="/dashboard/teacher" id="signup-button">
+                     Dashboard
+                  </a>
+               </li>
+               <li>
+                  <a href="users/SignOut" id="login-button">SignOut
+                  </a>
+               </li>
+               <%}else if(locals.user){%>
+               <li>
+                  <a href="users/signIn" id="login-button">
+                     Register
+                  </a>
+               </li>
+               <%}else {%>
 
-                        <li>
-                           <a href="users/signUp" id="signup-button">Sign Up 
-                           </a>
-                        </li>
-                     <%}%>
+               <li>
+                  <a href="users/signIn" id="login-button">Login
+                  </a>
+               </li>
+
+               <li>
+                  <a href="users/signUp" id="signup-button">Sign Up
+                  </a>
+               </li>
+               <%}%>
                   <!-- <li><a href="" id="login-button">Login</a></li>
                   <li><a href="" id="signup-button">Sign up</a></li> -->
                </ul>
@@ -192,43 +192,43 @@
          <div class="carousel-inner">
           
            <div class="carousel-item active" data-interval="10000">
-             <img src="<%=assetPath("images/3.png")%>" class="d-block w-100" alt="Snapshot 1" />
-             <div class="carousel-caption d-none d-md-block" style="color: #683aa4;">
-               <i class="fas fa-chalkboard-teacher"></i>
-               <h5>No limitations</h5>
-               <p>You have access to your assignments. You can raise doubts. You can report a problem. You are our priority.</p>
-             </div>
-           </div>
-           <div class="carousel-item" data-interval="10000">
-             <img src="<%=assetPath("images/2.png")%>" class="d-block w-100" alt="Snapshot 2" />
-             <div class="carousel-caption d-none d-md-block">
+             <img src="<%=assetPath("images/3-min.png")%>" class="d-block w-100" alt="Snapshot 1" />
+               <div class="carousel-caption d-none d-md-block" style="color: black;">
+                 
+                  
+                  <p>You have access to your assignments. You can raise doubts. You can report a problem. You are our
+                     priority.</p>
+               </div>
+         </div>
+         <div class="carousel-item" data-interval="10000">
+            <img src="<%=assetPath("images/1-min.png")%>" class="d-block w-100" alt="Snapshot 2" />
+            <div class="carousel-caption d-none d-md-block">
                <h5 style="color: black;">Login and that's it!</h5>
                <p style="color: black;">Every information at your "home step"</p>
-             </div>
-           </div>
-           <div class="carousel-item" data-interval="10000">
-             <img src="<%=assetPath("images/4.png")%>" class="d-block w-100" alt="Snapshot 3" />
-             <div class="carousel-caption d-none d-md-block">
-               <h5 style="color: black;">Still worried?</h5>
-               <p style="color: black;">We have a ton of features to help you out. Keep scrolling.</p>
-             </div>
-           </div>
+            </div>
          </div>
-         <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-           <span class="sr-only">Previous</span>
-         </a>
-         <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-           <span class="sr-only" style="color: black;">Next</span>
-         </a>
-       </div>
+         <div class="carousel-item" data-interval="10000">
+            <img src="<%=assetPath("images/2-min.png")%>" class="d-block w-100" alt="Snapshot 3" />
+            <div class="carousel-caption d-none d-md-block" >
+               <p style="color: white;">We have a ton of features to help you out. Keep scrolling.</p>
+            </div>
+         </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+         <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+         <span class="sr-only" style="color: black;">Next</span>
+      </a>
+      </div>
 
       <!-- Carousel ends -->
 
 
       <!-- Why Thunder Meet section begins -->
-      
+
       <section id="about-us">
          <div class="container">
             <div class="row align-items-center">
@@ -238,18 +238,19 @@
                <div class="col">
                   <h1>Why Thunder Meet</h1>
                   <p>
-                     COVID-19 has impacted all our lives. We’ve witnessed the best of the best failing in this pandemic. 
-                     Keeping the target of creating a platform that does not stop at any cost, we present to you, Thunder Meet.
-                  <br>Don't worry! Thunder Meet got everything covered.
+                     COVID-19 has impacted all our lives. We’ve witnessed the best of the best failing in this pandemic.
+                     Keeping the target of creating a platform that does not stop at any cost, we present to you,
+                     Thunder Meet.
+                     <br>Don't worry! Thunder Meet got everything covered.
                   </p>
                   <a href="organizations/register"><button class="btn btn-lg">Join Us</button></a>
-                  
+
                </div>
             </div>
          </div>
 
       </section>
-   
+
       <!-- About us section ends -->
 
       <!-- Founders section begins -->
@@ -259,77 +260,89 @@
             <div class="row align-items-center founders">
                <div>
                   <h1>Meet the founders</h1>
-                  <p>We at Thunder Meet burn our midnight oil to ensure that your meetings are hassle-free. Say Hi to the founders.</p>
+                  <p>We at Thunder Meet burn our midnight oil to ensure that your meetings are hassle-free. Say Hi to
+                     the founders.</p>
                </div>
                <div class="row align-items center" id="foundersImages">
                   <div class="col">
                      <div class="card mb-3">
                         <img src="../images/upkar_image.svg" class="card-img-top" alt="Upkar Saraswat">
                         <div class="card-body">
-                          <h5 class="card-title">Upkar Saraswat</h5>
-                          <p class="card-text">An avid technology enthusiast and web-developer, Upkar has experience in building highly scalable web-applications</p>
-                          <br>
+                           <h5 class="card-title">Upkar Saraswat</h5>
+                           <p class="card-text">An avid technology enthusiast and web-developer, Upkar has experience in
+                              building highly scalable web-applications</p>
+                           <br>
                            <div class="social-media-links">
-                              <a href="https://www.facebook.com/upkar.saraswat"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #683aa4;"></i></a>
-                              <a href="https://www.instagram.com/upkarsaraswat/"><i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #683aa4;"></i></a>
-                              <a href="https://www.youtube.com/channel/UCjOVxbNxxDzEYJHMDCPch-w"><i class="fa fa-youtube-play fa-2x" aria-hidden="true" style="color: #683aa4;"></i></a>
+                              <a href="https://www.facebook.com/upkar.saraswat"><i class="fa fa-facebook-square fa-2x"
+                                    aria-hidden="true" style="color: #683aa4;"></i></a>
+                              <a href="https://www.instagram.com/upkarsaraswat/"><i class="fa fa-instagram fa-2x"
+                                    aria-hidden="true" style="color: #683aa4;"></i></a>
+                              <a href="https://www.youtube.com/channel/UCjOVxbNxxDzEYJHMDCPch-w"><i
+                                    class="fa fa-youtube-play fa-2x" aria-hidden="true" style="color: #683aa4;"></i></a>
                            </div>
-                          <p class="card-text"><small class="text-muted">ReactJS, Java
-                          </small></p>
+                           <p class="card-text"><small class="text-muted">ReactJS, Java
+                              </small></p>
                         </div>
-                      </div>
+                     </div>
                   </div>
                   <div class="col">
                      <div class="card mb-3" style="overflow: hidden;">
-                        <img src="../images/sumit_banner.svg"  style="margin-left: -100px;" class="card-img-top" alt="Sumit Kumar">
+                        <img src="../images/sumit_banner.svg" style="margin-left: -100px;" class="card-img-top"
+                           alt="Sumit Kumar">
                         <div class="card-body">
                            <h5 class="card-title">Sumit Kumar</h5>
-                           <p class="card-text">A great learner and the man behind the plan, Sumit has experience in building highly scalable systems</p>
+                           <p class="card-text">A great learner and the man behind the plan, Sumit has experience in
+                              building highly scalable systems</p>
                            <br>
                            <div class="social-media-links">
-                              <a href="https://www.facebook.com/profile.php?id=100027802071821"><i class="fa fa-facebook-square fa-2x" aria-hidden="true" style="color: #683aa4;"></i></a>
-                              <a href="https://www.instagram.com/kumarsumit16022000/"><i class="fa fa-instagram fa-2x" aria-hidden="true" style="color: #683aa4;"></i></a>
-                              <a href="https://www.youtube.com/channel/UCjOVxbNxxDzEYJHMDCPch-w"><i class="fa fa-youtube-play fa-2x" aria-hidden="true" style="color: #683aa4;"></i></a>
+                              <a href="https://www.facebook.com/profile.php?id=100027802071821"><i
+                                    class="fa fa-facebook-square fa-2x" aria-hidden="true"
+                                    style="color: #683aa4;"></i></a>
+                              <a href="https://www.instagram.com/kumarsumit16022000/"><i class="fa fa-instagram fa-2x"
+                                    aria-hidden="true" style="color: #683aa4;"></i></a>
+                              <a href="https://www.youtube.com/channel/UCjOVxbNxxDzEYJHMDCPch-w"><i
+                                    class="fa fa-youtube-play fa-2x" aria-hidden="true" style="color: #683aa4;"></i></a>
                            </div>
-                          <p class="card-text"><small class="text-muted">NodeJS, MongoDB
-                          </small></p>
+                           <p class="card-text"><small class="text-muted">NodeJS, MongoDB
+                              </small></p>
                         </div>
-                      </div>
+                     </div>
                   </div>
                </div>
             </div>
          </div>
       </section>
       <!-- Founders section ends -->
-      
+
       <footer id="end" class="contact">
          <div class="content">
             <h2>Contact Us</h2>
-            <p>We are more than happy to solve any query you have. You can write to us for any information that you need from us.</p>
+            <p>We are more than happy to solve any query you have. You can write to us for any information that you need
+               from us.</p>
          </div>
          <div class="container">
             <div class="contactInfo">
-                  <div class="box">
-                     <div class="icon"><i class="fas fa-map-marker" aria-hidden="true"></i></div>
-                     <div class="text">
-                        <h3>Address</h3>
-                        <p>MNIT Jaipur <br> JLN Marg, Jaipur <br> IN - 302017</p>
-                     </div>
+               <div class="box">
+                  <div class="icon"><i class="fas fa-map-marker" aria-hidden="true"></i></div>
+                  <div class="text">
+                     <h3>Address</h3>
+                     <p>MNIT Jaipur <br> JLN Marg, Jaipur <br> IN - 302017</p>
                   </div>
-                  <div class="box">
-                     <div class="icon"><i class="fas fa-phone" aria-hidden="true"></i></div>
-                     <div class="text">
-                        <h3>Phone</h3>
-                        <p>+91 8769297586</p>
-                     </div>
+               </div>
+               <div class="box">
+                  <div class="icon"><i class="fas fa-phone" aria-hidden="true"></i></div>
+                  <div class="text">
+                     <h3>Phone</h3>
+                     <p>+91 8769297586</p>
                   </div>
-                  <div class="box">
-                     <div class="icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
-                     <div class="text">
-                        <h3>Email</h3>
-                        <p>thethunderbirdus@gmail.com</p>
-                     </div>
+               </div>
+               <div class="box">
+                  <div class="icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+                  <div class="text">
+                     <h3>Email</h3>
+                     <p>thethunderbirdus@gmail.com</p>
                   </div>
+               </div>
             </div>
             <div class="contactForm">
                <form action="">
@@ -343,7 +356,7 @@
                      <span>Email</span>
                   </div>
                   <div class="inputBox">
-                     <textarea  required></textarea>
+                     <textarea required></textarea>
                      <span>Write your query here ... </span>
                   </div>
                   <div class="inputBox">
@@ -355,20 +368,30 @@
       </footer>
 
       <script>
-         $(document).ready(function() {
-         //Preloader
-         preloaderFadeOutTime = 4000;
-         function hidePreloader() {
-         var preloader = $('.spinner-wrapper');
-         preloader.fadeOut(preloaderFadeOutTime);
+
+         function myFunction() {
+            if (window.scrollY == 0) {
+               document.getElementById('bar').classList.add("zoomIn");
+            } else {
+               document.getElementById('bar').classList.remove("zoomIn");
+            }
          }
-         hidePreloader();
+
+         $(document).ready(function () {
+            //Preloader
+            preloaderFadeOutTime = 4000;
+            function hidePreloader() {
+               var preloader = $('.spinner-wrapper');
+               preloader.fadeOut(preloaderFadeOutTime);
+            }
+            hidePreloader();
          });
       </script>
 
       <script src="<%=assetPath("js/stackpathbootstrap.js")%>"> </script>
 
-     
 
-   </body>
+
+</body>
+
 </html>

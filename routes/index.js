@@ -8,6 +8,7 @@ console.log("router loaded !!");
 const homeController=require('../controllers/home_controller');
 
 router.get("/",homeController.home);
+router.get("/sitemap",homeController.siteMap);
 router.get("/about",homeController.about);
 router.get("/privacyPolicies",homeController.policies);
 router.use("/users",require("./users"));

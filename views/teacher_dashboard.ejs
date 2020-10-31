@@ -1,443 +1,466 @@
-   <link rel="stylesheet" href="/css/teacher_dashboard.css">
-  
-  <style>
-      .open-button {
-        background: #444444;
-        color: white;
-        height: 40px;
-        width: 200px;
-        font-size: larger;
-      }
-      .open-button:hover {
-        background: black;
-        cursor: pointer;
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-      }
-      .open-button-2 {
-        background: #2e4ead;
-        color: white;
-        height: 40px;
-        width: 200px;
-        font-size: larger;
-      }
-      .open-button-2:hover {
-        background: #fff;
-        color: #2e4ead;
-        cursor: pointer;
-        border: 1px solid black;
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-      }
-      .wrapper#blur.active {
-        filter: blur(20px);
-        pointer-events: none;
-        user-select: none;
-      }
-      #popupForm {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        padding: 50px;
-        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
-        background: #fff;  
-        visibility: hidden;
-        opacity: 0;
-        transition: 0.5s;
-      }
-      #popupForm h1 {
-        color: #683aa4;
-        text-align: center;
-      }
-      #popupForm label {
-        font-weight: bold;
-        display: block;
-        padding: 12px 0;
-      }
-      #popupForm .formbtn {
-        background-color: #4CAF50;
-        color: white;
-        padding: 16px 20px;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        margin-bottom:10px;
-        opacity: 0.8;
-      }
-      #popupForm .cancel {
-        background-color: red;
-      }
-      #popupForm input[type=number],select{
-        width: 70%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        box-sizing: border-box;
-        /* border: none; */
-        border: 2px solid red;
-        border-radius: 4px;
-      }
-      #popupForm.active {
-        top: 50%;
-        visibility: visible;
-        opacity: 1;
-        transition: 0.5s;
-      }
-  </style>
+<link rel="stylesheet" href="/css/teacher_dashboard.css">
+
+<style>
+  .open-button {
+    background: #444444;
+    color: white;
+    height: 40px;
+    width: 200px;
+    font-size: larger;
+  }
+
+  .open-button:hover {
+    background: black;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .open-button-2 {
+    background: #2e4ead;
+    color: white;
+    height: 40px;
+    width: 200px;
+    font-size: larger;
+  }
+
+  .open-button-2:hover {
+    background: #fff;
+    color: #2e4ead;
+    cursor: pointer;
+    border: 1px solid black;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .wrapper#blur.active {
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  #popupForm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+  }
+
+  #popupForm h1 {
+    color: #683aa4;
+    text-align: center;
+  }
+
+  #popupForm label {
+    font-weight: bold;
+    display: block;
+    padding: 12px 0;
+  }
+
+  #popupForm .formbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  #popupForm .cancel {
+    background-color: red;
+  }
+
+  #popupForm input[type=number],
+  select {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    /* border: none; */
+    border: 2px solid red;
+    border-radius: 4px;
+  }
+
+  #popupForm.active {
+    top: 50%;
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+  }
+</style>
 
 <body>
 
-<div class="wrapper" id="blur">
-  <div class="top_navbar">
-    <div class="hamburger">
-       <div class="one"></div>
-       <div class="two"></div>
-       <div class="three"></div>
-    </div>
-    <div class="top_menu">
-      <div class="logo"><img style="height: 60px; width: auto;" src="<%=assetPath("images/logo.svg")%>" ></div>
-  
-      <div class="navbar-right">
-        <div class="notifications">
-          <div class="icon_wrap">
-            <i class="far fa-bell"></i>
+  <div class="wrapper" id="blur">
+    <div class="top_navbar">
+      <div class="hamburger">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+      </div>
+      <div class="top_menu">
+        <div class="logo"><img style="height: 30px; margin-left: -10px;"  src="<%=assetPath("images/logo.svg")%>"></div>
+
+        <div class="navbar-right">
+          <div class="notifications">
+            <div class="icon_wrap">
+              <i class="far fa-bell"></i>
+            </div>
+            <div class="notification_dd">
+              <ul class="notification_ul">
+                <li class="success starbucks">
+                  <div class="notify_icon">
+                    <span class="icon"></span>
+                  </div>
+                  <div class="notify_data">
+                    <div class="title">
+                      Doubt
+                    </div>
+                    <div class="sub_title">
+                      Doubt in netstat
+                    </div>
+                  </div>
+                  <div class="notify_status">
+                    <p>Success</p>
+                  </div>
+                </li>
+                <li class="failed baskin_robbins">
+                  <div class="notify_icon">
+                    <span class="icon"></span>
+                  </div>
+                  <div class="notify_data">
+                    <div class="title">
+                      Complaint
+                    </div>
+                    <div class="sub_title">
+                      Not able to update profile picture
+                    </div>
+                  </div>
+                  <div class="notify_status">
+                    <p>Failed</p>
+                  </div>
+                </li>
+                <li class="success mcd">
+                  <div class="notify_icon">
+                    <span class="icon"></span>
+                  </div>
+                  <div class="notify_data">
+                    <div class="title">
+                      Dummy Text
+                    </div>
+                    <div class="sub_title">
+                      Random description of notif
+                    </div>
+                  </div>
+                  <div class="notify_status">
+                    <p>Success</p>
+                  </div>
+                </li>
+                <li class="failed pizza_hut">
+                  <div class="notify_icon">
+                    <span class="icon"></span>
+                  </div>
+                  <div class="notify_data">
+                    <div class="title">
+                      Dummy Text
+                    </div>
+                    <div class="sub_title">
+                      Random description of notif
+                    </div>
+                  </div>
+                  <div class="notify_status">
+                    <p>Failed</p>
+                  </div>
+                </li>
+                <li class="success kfc">
+                  <div class="notify_icon">
+                    <span class="icon"></span>
+                  </div>
+                  <div class="notify_data">
+                    <div class="title">
+                      Dummy Text
+                    </div>
+                    <div class="sub_title">
+                      Random description of notif
+                    </div>
+                  </div>
+                  <div class="notify_status">
+                    <p>Success</p>
+                  </div>
+                </li>
+                <li class="show_all">
+                  <p class="link">Show all activities</p>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="notification_dd">
-            <ul class="notification_ul">
-              <li class="success starbucks">
-                <div class="notify_icon">
-                  <span class="icon"></span>
-                </div>
-                <div class="notify_data">
-                  <div class="title">
-                    Doubt
-                  </div>
-                  <div class="sub_title">
-                    Doubt in netstat
-                  </div>
-                </div>
-                <div class="notify_status">
-                  <p>Success</p>
-                </div>
-              </li>
-              <li class="failed baskin_robbins">
-                <div class="notify_icon">
-                  <span class="icon"></span>
-                </div>
-                <div class="notify_data">
-                  <div class="title">
-                    Complaint
-                  </div>
-                  <div class="sub_title">
-                    Not able to update profile picture
-                  </div>
-                </div>
-                <div class="notify_status">
-                  <p>Failed</p>
-                </div>
-              </li>
-              <li class="success mcd">
-                <div class="notify_icon">
-                  <span class="icon"></span>
-                </div>
-                <div class="notify_data">
-                  <div class="title">
-                    Dummy Text
-                  </div>
-                  <div class="sub_title">
-                    Random description of notif
-                  </div>
-                </div>
-                <div class="notify_status">
-                  <p>Success</p>
-                </div>
-              </li>
-              <li class="failed pizza_hut">
-                <div class="notify_icon">
-                  <span class="icon"></span>
-                </div>
-                <div class="notify_data">
-                  <div class="title">
-                    Dummy Text
-                  </div>
-                  <div class="sub_title">
-                    Random description of notif
-                  </div>
-                </div>
-                <div class="notify_status">
-                  <p>Failed</p>
-                </div>
-              </li>
-              <li class="success kfc">
-                <div class="notify_icon">
-                  <span class="icon"></span>
-                </div>
-                <div class="notify_data">
-                  <div class="title">
-                    Dummy Text
-                  </div>
-                  <div class="sub_title">
-                    Random description of notif
-                  </div>
-                </div>
-                <div class="notify_status">
-                  <p>Success</p>
-                </div>
-              </li>
-              <li class="show_all">
-                <p class="link">Show all activities</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="profile">
-          <div class="icon_wrap">
-            <img src="<%=user.avatar%>" alt="">
-            <span class="name"><%=user.name%></span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="profile_dd">
-            <ul class="profile_ul">
-              <li class="profile_li">
-                <a href="#" class="settings">
-                  <i class="fas fa-user-cog"></i>
-                  <span class="picon"></span>
-                  Settings
-                </a>
-                <!-- <div class="btn"></div> -->
-              </li>
-              <li>
-                <a href="/users/SignOut" class="logout">
-                  <i class="fas fa-sign-out-alt"></i>
-                  <span class="picon"></span>
-                  Log out
-                </a>
-              </li>
-            </ul>
+          <div class="profile">
+            <div class="icon_wrap">
+              <img src="<%=user.avatar%>" alt="">
+              <span class="name"><%=user.name%></span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="profile_dd">
+              <ul class="profile_ul">
+                <li class="profile_li">
+                  <a href="#" class="settings">
+                    <i class="fas fa-user-cog"></i>
+                    <span class="picon"></span>
+                    Settings
+                  </a>
+                  <!-- <div class="btn"></div> -->
+                </li>
+                <li>
+                  <a href="/users/SignOut" class="logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="picon"></span>
+                    Log out
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="popup">
-    <div class="shadow"></div>
-    <div class="popup_inner">
-      <div class="notification_dd">
-        <ul class="notification_ul">
-          <li class="title">
-            <p>All notifications</p>
-            <p class="close">
-              <i class="fas fa-times" aria-hidden="true"></i>
-            </p>
-          </li>
-          <li class="success starbucks">
-            <div class="notify_icon">
-              <span class="icon"></span>
-            </div>
-            <div class="notify_data">
-              <div class="title">
-                Dummy Text
+    <div class="popup">
+      <div class="shadow"></div>
+      <div class="popup_inner">
+        <div class="notification_dd">
+          <ul class="notification_ul">
+            <li class="title">
+              <p>All notifications</p>
+              <p class="close">
+                <i class="fas fa-times" aria-hidden="true"></i>
+              </p>
+            </li>
+            <li class="success starbucks">
+              <div class="notify_icon">
+                <span class="icon"></span>
               </div>
-              <div class="sub_title">
-                Random description of notif
+              <div class="notify_data">
+                <div class="title">
+                  Dummy Text
+                </div>
+                <div class="sub_title">
+                  Random description of notif
+                </div>
               </div>
-            </div>
-            <div class="notify_status">
-              <p>Success</p>
-            </div>
-          </li>
-          <li class="failed baskin_robbins">
-            <div class="notify_icon">
-              <span class="icon"></span>
-            </div>
-            <div class="notify_data">
-              <div class="title">
-                Dummy Text
+              <div class="notify_status">
+                <p>Success</p>
               </div>
-              <div class="sub_title">
-                Random description of notif
+            </li>
+            <li class="failed baskin_robbins">
+              <div class="notify_icon">
+                <span class="icon"></span>
               </div>
-            </div>
-            <div class="notify_status">
-              <p>Failed</p>
-            </div>
-          </li>
-          <li class="success mcd">
-            <div class="notify_icon">
-              <span class="icon"></span>
-            </div>
-            <div class="notify_data">
-              <div class="title">
-                Dummy Text
+              <div class="notify_data">
+                <div class="title">
+                  Dummy Text
+                </div>
+                <div class="sub_title">
+                  Random description of notif
+                </div>
               </div>
-              <div class="sub_title">
-                Random description of notif
+              <div class="notify_status">
+                <p>Failed</p>
               </div>
-            </div>
-            <div class="notify_status">
-              <p>Success</p>
-            </div>
-          </li>
-          <li class="failed pizza_hut">
-            <div class="notify_icon">
-              <span class="icon"></span>
-            </div>
-            <div class="notify_data">
-              <div class="title">
-                Dummy Text
+            </li>
+            <li class="success mcd">
+              <div class="notify_icon">
+                <span class="icon"></span>
               </div>
-              <div class="sub_title">
-                Random description of notif
+              <div class="notify_data">
+                <div class="title">
+                  Dummy Text
+                </div>
+                <div class="sub_title">
+                  Random description of notif
+                </div>
               </div>
-            </div>
-            <div class="notify_status">
-              <p>Failed</p>
-            </div>
-          </li>
-          <li class="success kfc">
-            <div class="notify_icon">
-              <span class="icon"></span>
-            </div>
-            <div class="notify_data">
-              <div class="title">
-                Dummy Text
+              <div class="notify_status">
+                <p>Success</p>
               </div>
-              <div class="sub_title">
-                Random description of notif
+            </li>
+            <li class="failed pizza_hut">
+              <div class="notify_icon">
+                <span class="icon"></span>
               </div>
-            </div>
-            <div class="notify_status">
-              <p>Success</p>
-            </div>
-          </li>
-        </ul>
+              <div class="notify_data">
+                <div class="title">
+                  Dummy Text
+                </div>
+                <div class="sub_title">
+                  Random description of notif
+                </div>
+              </div>
+              <div class="notify_status">
+                <p>Failed</p>
+              </div>
+            </li>
+            <li class="success kfc">
+              <div class="notify_icon">
+                <span class="icon"></span>
+              </div>
+              <div class="notify_data">
+                <div class="title">
+                  Dummy Text
+                </div>
+                <div class="sub_title">
+                  Random description of notif
+                </div>
+              </div>
+              <div class="notify_status">
+                <p>Success</p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="tabs" class="sidebar">
+    <div id="tabs" class="sidebar">
       <ul>
-        <li><a id="b1"  class="active">
-          <span class="icon"><i class="fas fa-home"></i></span>
-          <span class="title">
-           <!-- <button id="b1" >Home</button>  -->
-            Home
-         
-          </span></a></li>
+        <li><a id="b1" class="active">
+            <span class="icon"><i class="fas fa-home"></i></span>
+            <span class="title">
+              <!-- <button id="b1" >Home</button>  -->
+              Home
+
+            </span></a></li>
         <li><a id="b2" href="#tabs-classes">
-          <span class="icon"><i class="fas fa-hourglass"></i></span>
-          <span class="title">
-             Classes
-             <!-- <button id="b2" >Classes</button> -->
+            <span class="icon"><i class="fas fa-hourglass"></i></span>
+            <span class="title">
+              Classes
+              <!-- <button id="b2" >Classes</button> -->
             </span>
           </a></li>
-          <li>
-            <a id="b6" href="#tabs-liveClass">
-              <span class="icon"><i class="fas fa-play"></i></span>
-              <span class="title">
-                Live
-              </span>
-            </a>
-          </li>
+        <li>
+          <a id="b6" href="#tabs-liveClass">
+            <span class="icon"><i class="fas fa-play"></i></span>
+            <span class="title">
+              Live
+            </span>
+          </a>
+        </li>
         <li><a id="b3" href="#tabs-assignments">
-          <span class="icon"><i class="fas fa-tasks"></i></span>
-          <span class="title">
-             Students
-             <!-- <button id="b3" >Assignments</button> -->
+            <span class="icon"><i class="fas fa-tasks"></i></span>
+            <span class="title">
+              Students
+              <!-- <button id="b3" >Assignments</button> -->
             </span>
           </a></li>
         <li><a id="b4" href="#tabs-profile">
-          <span class="icon"><i class="fas fa-user"></i></span>
-          <span class="title">
-            <!-- <button id="b4" >Profile</button> -->
-            Profile
+            <span class="icon"><i class="fas fa-user"></i></span>
+            <span class="title">
+              <!-- <button id="b4" >Profile</button> -->
+              Profile
             </span>
           </a></li>
         <li><a id="b5" href="#tabs-report">
-          <span class="icon"><i class="fas fa-flag"></i></span>
-          <span class="title">
-             Report
-             <!-- <button id="b5">Report</button> -->
+            <span class="icon"><i class="fas fa-flag"></i></span>
+            <span class="title">
+              Report
+              <!-- <button id="b5">Report</button> -->
             </span>
           </a></li>
-    </ul>
-  </div>
-  
-  <div id="c1" class="main_container" style="display: block;background-color: white;">
-    <h1 style="color: #5A5C69;">Dashboard</h1>
-    <div class="summaryCards">
-      <div class="contentCard">
-        <div class="info">
-          <h1 style="color: #2e4ead;font-size: xx-large;"><%=user.totalClass%></h1>
-          <h3>Total classes hosted</h3>
-        </div>
-        <div class="sideLogo">
-          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="contentCard">
-        <div class="info">
-          <h1 style="color: #2e4ead;font-size: xx-large;">0</h1>
-          <h3>Classes cancelled</h3>
-        </div>
-        <div class="sideLogo">
-          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-emoji-smile" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-            <path fill-rule="evenodd" d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683z"/>
-            <path d="M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="contentCard">
-        <div class="info">
-          <h1 style="color: #2e4ead;font-size: xx-large;">Verdict</h1>
-          <h3>Excellent student reviews</h3>
-        </div>
-        <div class="sideLogo">
-          <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-emoji-sunglasses" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-            <path fill-rule="evenodd" d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM6.5 6.497V6.5h-1c0-.568.447-.947.862-1.154C6.807 5.123 7.387 5 8 5s1.193.123 1.638.346c.415.207.862.586.862 1.154h-1v-.003l-.003-.01a.213.213 0 0 0-.036-.053.86.86 0 0 0-.27-.194C8.91 6.1 8.49 6 8 6c-.491 0-.912.1-1.19.24a.86.86 0 0 0-.271.194.213.213 0 0 0-.036.054l-.003.01z"/>
-            <path d="M2.31 5.243A1 1 0 0 1 3.28 4H6a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2h-.438a2 2 0 0 1-1.94-1.515L2.31 5.243zM9 5a1 1 0 0 1 1-1h2.72a1 1 0 0 1 .97 1.243l-.311 1.242A2 2 0 0 1 11.439 8H11a2 2 0 0 1-2-2V5z"/>
-          </svg>
-        </div>
-      </div>
+      </ul>
     </div>
 
-    <div id="date">
-      Wednesday, September 22
-    </div>
-
-    <div class="mainCards">
-      <div class="contentCard">
-        <div class="info">
-          <h1 style="color: #2e4ead;font-size: xx-large;">Vacant?</h1>
-          <h3 style="font-size:medium;">Have a look into your schedule and host a class.</h3>
-          <button class="open-button-2" onclick="toggle()">Time table</button>
+    <div id="c1" class="main_container" style="display: block;background-color: white;">
+      <h1 style="color: #5A5C69;">Dashboard</h1>
+      <div class="summaryCards">
+        <div class="contentCard">
+          <div class="info">
+            <h1 style="color: #2e4ead;font-size: xx-large;"><%=user.totalClass%></h1>
+            <h3>Total classes hosted</h3>
+          </div>
+          <div class="sideLogo">
+            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+            </svg>
+          </div>
         </div>
-      </div>  
+        <div class="contentCard">
+          <div class="info">
+            <h1 style="color: #2e4ead;font-size: xx-large;">0</h1>
+            <h3>Classes cancelled</h3>
+          </div>
+          <div class="sideLogo">
+            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-emoji-smile" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path fill-rule="evenodd"
+                d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683z" />
+              <path
+                d="M7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+            </svg>
+          </div>
+        </div>
+        <div class="contentCard">
+          <div class="info">
+            <h1 style="color: #2e4ead;font-size: xx-large;">Verdict</h1>
+            <h3>Excellent student reviews</h3>
+          </div>
+          <div class="sideLogo">
+            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-emoji-sunglasses" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path fill-rule="evenodd"
+                d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM6.5 6.497V6.5h-1c0-.568.447-.947.862-1.154C6.807 5.123 7.387 5 8 5s1.193.123 1.638.346c.415.207.862.586.862 1.154h-1v-.003l-.003-.01a.213.213 0 0 0-.036-.053.86.86 0 0 0-.27-.194C8.91 6.1 8.49 6 8 6c-.491 0-.912.1-1.19.24a.86.86 0 0 0-.271.194.213.213 0 0 0-.036.054l-.003.01z" />
+              <path
+                d="M2.31 5.243A1 1 0 0 1 3.28 4H6a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2h-.438a2 2 0 0 1-1.94-1.515L2.31 5.243zM9 5a1 1 0 0 1 1-1h2.72a1 1 0 0 1 .97 1.243l-.311 1.242A2 2 0 0 1 11.439 8H11a2 2 0 0 1-2-2V5z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div id="date">
+        Wednesday, September 22
+      </div>
+
+      <div class="mainCards">
+        <div class="contentCard">
+          <div class="info">
+            <h1 style="color: #2e4ead;font-size: xx-large;">Vacant?</h1>
+            <h3 style="font-size:medium;">Have a look into your schedule and host a class.</h3>
+            <button class="open-button-2" onclick="toggle()">Time table</button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div id="c2" class="main_container" style="display: none;background-color: #fff;">
-    <div class="heading">
-      <h2>Host a meeting</h2>
-    </div>
-    <div class="choices">
-      <div class="google-meet">
-        <h1>Hosting a class is simple</h1>
-        <p class="border-pill">
-          If the current slot is not occupied, just go to classes choose the year and branch you want to host the meeting for, click host and you’re good to go!
-          Refresh the page. Go to live classes. If number of students is less, for example in a doubt class, we suggest you choose local meeting. Else, feel free 
-          to use Google Meet anytime. Join the meeting with a button click. It’s that easy.
-        </p>
+    <div id="c2" class="main_container" style="display: none;background-color: #fff;">
+      <div class="heading">
+        <h2>Host a meeting</h2>
+      </div>
+      <div class="choices">
+        <div class="google-meet">
+          <h1>Hosting a class is simple</h1>
+          <p class="border-pill">
+            If the current slot is not occupied, just go to classes choose the year and branch you want to host the
+            meeting for, click host and you’re good to go!
+            Refresh the page. Go to live classes. If number of students is less, for example in a doubt class, we
+            suggest you choose local meeting. Else, feel free
+            to use Google Meet anytime. Join the meeting with a button click. It’s that easy.
+          </p>
           <br>
-         <p style="color: red;"> If the slot is occupied, you’ll receive a notification informing you about the current meeting</p>
-        <img src="<%=assetPath("images/logo.svg")%>" alt="google-meet">
-        <button class="btn bg-primary" style="margin-top: 35px; color: white;" onclick="toggle()">Click here</button>
-      </div> 
+          <p style="color: red;"> If the slot is occupied, you’ll receive a notification informing you about the current
+            meeting</p>
+          <img src="<%=assetPath("images/logo.svg")%>" alt="google-meet">
+          <button class="btn bg-primary" style="margin-top: 35px; color: white;" onclick="toggle()">Click here</button>
+        </div>
+      </div>
     </div>
-</div>
 
 
-   <div id="c3" class="main_container" style="display: none;background-color: #fff;">
+    <div id="c3" class="main_container" style="display: none;background-color: #fff;">
       <div class="item">
 
 
@@ -457,27 +480,28 @@
               <th scope="col">Registered</th>
             </tr>
           </thead>
-        
+
 
           <tbody>
-            
+
             <% let sr=0%>
             <%for(i of students){%>
-            
-          
-              <%sr++%>
-              <tr style="text-align: center;">
-                <th scope="row"><%=sr%></th>
-                <td>    <img src="<%=i.avatar%>" alt="user" style="width: 30px; border-radius: 50%;" class="animated flip"></td>
-                <td>  <%=i.name%> </td>
-                <td><%=i.email%> </td>
-                <td><%=i.branch%> </td>
-                <td> <%=i.roll%></td>
-                <td>      <%=i.contact%></td>
-                <td><%=i.year%></td>
-                <td><%=i.createdAt%></td>
-                
-              </tr>
+
+
+            <%sr++%>
+            <tr style="text-align: center;">
+              <th scope="row"><%=sr%></th>
+              <td> <img src="<%=i.avatar%>" alt="user" style="width: 30px; border-radius: 50%;" class="animated flip">
+              </td>
+              <td> <%=i.name%> </td>
+              <td><%=i.email%> </td>
+              <td><%=i.branch%> </td>
+              <td> <%=i.roll%></td>
+              <td> <%=i.contact%></td>
+              <td><%=i.year%></td>
+              <td><%=i.createdAt%></td>
+
+            </tr>
 
             <%}%>
           
@@ -509,306 +533,334 @@
             <h3>Organization : <%=org.organization%></h3>
             <h6><%=org.address%></h6>
             <br><br>
-            <p class="card-text" style="color: 6c757d; text-transform: uppercase;"><small class="text-muted"><%=org.name%>
-            </small></p>
-          </div>
-          <div class="sideLogo">
-            <img src="<%=user.avatar%>" alt="profile-picture">
-            <button id="profileUpdate" style="display: none;">Update</button>
-          </div>
-        </div>
+            <p class="card-text" style="color: 6c757d; text-transform: uppercase;"><small
+                class="text-muted"><%=org.name%>
+              </small></p>
+      </div>
+      <div class="sideLogo">
+        <img src="<%=user.avatar%>" alt="profile-picture">
+        <button id="profileUpdate" style="display: none;">Update</button>
       </div>
     </div>
+  </div>
+  </div>
 
 
 
-    <div id="c5" class="main_container" style="display: none;background-color: #fff;">
-      <div class="left">
-        <div class="text">
-          <h1>Report an issue</h1>
-          <p></p>
-        </div>
-        <div class="photo"></div>
+  <div id="c5" class="main_container" style="display: none;background-color: #fff;">
+    <div class="left">
+      <div class="text">
+        <h1>Report an issue</h1>
+        <p></p>
       </div>
-      <div class="right">
-        <form action="">
-          <!-- <h2>Send a message</h2> -->
-                  <div class="inputBox">
-                     <input type="text" name="Name" required>
-                     <span>Full Name</span>
-                  </div>
-                  <div class="inputBox">
-                     <input type="email" name="email" required>
-                     <span>Email</span>
-                  </div>
-                  <div class="inputBox">
-                     <textarea  required></textarea>
-                     <span>Write your complaint here </span>
-                  </div>
-                  <div class="inputBox">
-                     <input type="submit" name="" value="Send">
-                  </div>
-        </form>
+      <div class="photo"></div>
+    </div>
+    <div class="right">
+      <form action="">
+        <!-- <h2>Send a message</h2> -->
+        <div class="inputBox">
+          <input type="text" name="Name" required>
+          <span>Full Name</span>
+        </div>
+        <div class="inputBox">
+          <input type="email" name="email" required>
+          <span>Email</span>
+        </div>
+        <div class="inputBox">
+          <textarea required></textarea>
+          <span>Write your complaint here </span>
+        </div>
+        <div class="inputBox">
+          <input type="submit" name="" value="Send">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="c6" class="main_container" style="display: none;background-color: #fff;">
+
+    <div class="video-wrapper">
+      <div class="title" style="width: 100%;">
+        <h2>Your lectures</h2>
+        <h2 id="demo"></h2>
+      </div>
+
+     
+      <% 
+      var z= new Date((new Date().toISOString()).split("T")[0]+"T"+"00:01")
+      var y= new Date((new Date().toISOString()).split("T")[0]+"T"+"23:59");
+      %>
+
+      <button class="btn" style="width: 100%; font-weight: bold; background-color: #683aa4; color: white;">
+        Today's Lectures
+      </button>
+
+      <div class="current">
+
+        <% for(i of links){%>
+        <% var x= new Date( i.startFrom );%>
+        <% if(x>z && y>x){%>
+        <div class="lectures">
+          <h3><%=i.classOf%> - <%=i.moderator%></h3>
+          <br>
+          <h4><%= ((i.startFrom).split("T")[1]).split(":")[0] %>:00 -
+            <%=((i.startFrom).split("T")[1]).split(":")[0] %>:59 <sub style="font-size: 10px;">Created At -
+              <%= String(i.createdAt).split("GMT")[0] %> </sub>
+          </h4>
+        </div>
+
+        <div style="display: flex; flex-direction: row;">
+          <a style="color: black; font-weight: 600; width: 50%;" href="<%=i.meetLinks%>">
+            <div class="btn" style=" border: 1px solid #283ea4;">Via Google Meet</div>
+          </a>
+          <a style="color: black; font-weight: 600; width: 50%;" href="//sumitkumar.ml/<%=i.localLinks%>">
+            <div class="btn" style="border: 1px solid #283ea4;">Via Thunder Meet</div>
+          </a>
+        </div>
+        <%}%>
+        <%}%>
+
+      </div>
+
+      <button class="btn" id="upcoming"
+        style="width: 100%; font-weight: bold; background-color: #683aa4; color: white;">Upcoming lectures</button>
+      <div class="upcoming_today">
+        <% for(i of links){%>
+
+        <% var x= new Date( i.startFrom );%>
+
+        <% if(x>z && x>y){%>
+        <div class="lectures">
+          <h3><%=i.classOf%> - <%=i.moderator%></h3>
+          <br>
+          <h4><%= ((i.startFrom).split("T")[1]).split(":")[0] %>:00 -
+            <%=((i.startFrom).split("T")[1]).split(":")[0] %>:59 <sub style="font-size: 10px;">Created At -
+              <%= String(i.createdAt).split("GMT")[0] %> </sub></h4>
+
+        </div>
+
+        <div style="display: flex; flex-direction: row; width: 100%;">
+          <a style="color: black; font-weight: 600; width: 50%;" href="<%=i.meetLinks%>">
+            <div class="btn" style=" border: 1px solid #283ea4;">Google Meet</div>
+          </a>
+          <a style="color: black; font-weight: 600; width: 50%;" href="//sumitkumar.ml/<%=i.localLinks%>">
+            <div class="btn" style="border: 1px solid #283ea4;">Thunder Meet</div>
+          </a>
+        </div>
+        <%}%>
+      
+        <%}%>
+      </div>
+      <button class="btn" style="background-color: #683aa4; width: 100%; color: white; font-weight: bold;" id="gone">
+        Past Lectures
+      </button>
+      <div class="past_lectures">
+        <% for(i of links){%>
+
+        <% var x= new Date( i.startFrom );%>
+
+        <% if(x<y && x<z){%>
+        <div class="lectures">
+          <h3><%=i.classOf%> - <%=i.moderator%></h3>
+          <br>
+          <h4><%= ((i.startFrom).split("T")[1]).split(":")[0] %>:00 -
+            <%=((i.startFrom).split("T")[1]).split(":")[0] %>:59 <sub style="font-size: 10px;">Created At -
+              <%= String(i.createdAt).split("GMT")[0] %> </sub></h4>
+        </div>
+        <div style="display: flex; flex-direction: row;">
+          <a style="color: black; font-weight: 600; width: 50%;" href="<%=i.meetLinks%>">
+            <div class="btn" style=" border: 1px solid #283ea4;">Google Meet</div>
+          </a>
+          <a style="color: black; font-weight: 600; width: 50%;" href="//sumitkumar.ml/<%=i.localLinks%>">
+            <div class="btn" style="border: 1px solid #283ea4;">Thunder Meet</div>
+          </a>
+        </div>
+        <%}%>
+       
+      <%}%>
       </div>
     </div>
+  </div>
 
-    <div id="c6" class="main_container" style="display: none;background-color: #fff;">
-   
-      <div class="video-wrapper">
-        <div class="title">
-          <h2>Current lecture</h2>
-          <h2 id="demo"></h2>
-        </div>
-
-        <iframe class="calendar" src="https://calendar.google.com/calendar/embed?mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=5ptfkiqbvpup2gfo62gdfaig7o%40group.calendar.google.com&amp;color=%23691426&amp;ctz=America%2FDenver" style="border-width:0" width="800" height="600" frameborder="0"></iframe>
-        <%if(links.friendships == 0){%>
-          <h3>No Scheduled Classes For Fow</h3>
-        <%}else{%>
-          <%for(i of links){%>
-            <a href="<%=i.meetLinks%>" class="btn bg-info" style="width: 50%;">Via Google Meet</a>
-            <a href="//sumitkumar.ml/<%=i.localLinks%>" target="_blank" class="btn bg-primary" style="width: 50%;">Local Meeting</a>
-            <%}%>
-          <%}%>
-      </div>
-    </div>
-
-</div>
+  </div>
 
 
-<div id="popupForm">
-  <h1>Host a meeting</h1>
-  <br><br>
-  <form action="/dashboard/createClass" method="POST">
-    <label for="year">Year </label>
-    <select name="year" id="year">
-      <option value="year">Select year</option>
-      <option value="1">I</option>
-      <option value="2">II</option>
-      <option value="3">III</option>
-      <option value="4">IV</option>
-    </select>
-    <label for="branch">Branch</label>
-    <select name="branch" id="branch">
-      <option value="branch">Select branch</option>
-      <option value="CSE">CSE</option>
-      <option value="ECE">ECE</option>
-      <option value="IT">MECH</option>
-      <option value="ME">CHEMICAL</option>
-      <option value="CHE">CIVIL</option>
-      <option value="other">Other</option>
-    </select>
-
-    <label for="subject">Subject</label>
-    <input style="padding: 20px; border: red 1px solid ;" type="text" id="subject" name="subject" placeholder="subject" required>
-    <br>
-    <label for="time">choose a slot</label>
-    <input type="time" name="time" id="time" style="width: 100%; padding: 10px; border: red 1px solid ;"  required>
-    <br>
-    <label for="ChooseDate">Date</label>
-    <input type="date" name="date" id="ChooseDate" style="width: 100%; padding: 10px; border: red 1px solid ;" required>
+  <div id="popupForm">
+    <h1>Host a meeting</h1>
     <br><br>
-    <button id="hostSubmit" class="formbtn" onclick="toggle()">Host</button>
-    <button id="close" class="formbtn cancel" onclick="toggle()">Close</button>
-  </form>
-</div>
+    <form action="/dashboard/createClass" method="POST">
+      <label for="year">Year </label>
+      <select name="year" id="year">
+        <option value="year">Select year</option>
+        <option value="1">I</option>
+        <option value="2">II</option>
+        <option value="3">III</option>
+        <option value="4">IV</option>
+      </select>
+      <label for="branch">Branch</label>
+      <select name="branch" id="branch">
+        <option value="branch">Select branch</option>
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="IT">MECH</option>
+        <option value="ME">CHEMICAL</option>
+        <option value="CHE">CIVIL</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="subject">Subject</label>
+      <input style="padding: 20px; border: red 1px solid ;" type="text" id="subject" name="subject"
+        placeholder="subject" required>
+      <br>
+      <label for="time">choose a slot</label>
+      <input type="time" name="time" id="time" style="width: 100%; padding: 10px; border: red 1px solid ;" required>
+      <br>
+      <label for="ChooseDate">Date</label>
+      <input type="date" name="date" id="ChooseDate" style="width: 100%; padding: 10px; border: red 1px solid ;"
+        required>
+      <br><br>
+      <button id="hostSubmit" class="formbtn" onclick="toggle()">Host</button>
+      <button id="close" class="formbtn cancel" onclick="toggle()">Close</button>
+    </form>
+  </div>
 
   <script>
 
-        //for fetching time
-        var d = new Date();
-  var n = d.getHours();
-  document.getElementById("demo").innerHTML = n+"am - "+(n)+":45am";
+    //for fetching time
+    var d = new Date();
+    var n = d.getHours();
+    document.getElementById("demo").innerHTML = n + ":00 - " + (n) + ":59";
 
-    document.getElementById("b1").addEventListener("click",function(){
-      var content1 = document.getElementById("c1");
-      var content2 = document.getElementById("c2");
-      var content3 = document.getElementById("c3");
-      var content4 = document.getElementById("c4");
-      var content5 = document.getElementById("c5");
-      var content6 = document.getElementById("c6");
-      if(content1.style.display=="none"){
-        content1.style.display="block";
-        content2.style.display="none";
-        content3.style.display="none";
-        content4.style.display="none";
-        content5.style.display="none";
-        content6.style.display="none";
-      }else{
-        content1.style.display="none";
-      }
+    $('#b1').click(function () {
+      $('#c1').show();
+      $('#c2').hide();
+      $('#c3').hide();
+      $('#c4').hide();
+      $('#c5').hide();
+      $('#c6').hide();
     });
-    document.getElementById("b2").addEventListener("click",function(){
-      var content1 = document.getElementById("c2");
-      var content2 = document.getElementById("c1");
-      var content3 = document.getElementById("c3");
-      var content4 = document.getElementById("c4");
-      var content5 = document.getElementById("c5");
-      var content6 = document.getElementById("c6");
-      if(content1.style.display=="none"){
-        content1.style.display="block";
-        content2.style.display="none";
-        content3.style.display="none";
-        content4.style.display="none";
-        content5.style.display="none";
-        content6.style.display="none";
-      }else{
-        content1.style.display="none";
-      }
+    $('#b2').click(function () {
+      $('#c1').hide();
+      $('#c2').show();
+      $('#c3').hide();
+      $('#c4').hide();
+      $('#c5').hide();
+      $('#c6').hide();
     });
-    document.getElementById("b3").addEventListener("click",function(){
-      var content1 = document.getElementById("c3");
-      var content2 = document.getElementById("c1");
-      var content3 = document.getElementById("c2");
-      var content4 = document.getElementById("c4");
-      var content5 = document.getElementById("c5");
-      var content6 = document.getElementById("c6");
-      if(content1.style.display=="none"){
-        content1.style.display="block";
-        content2.style.display="none";
-        content3.style.display="none";
-        content4.style.display="none";
-        content5.style.display="none";
-        content6.style.display="none";
-      }else{
-        content1.style.display="none";
-      }
+    $('#b3').click(function () {
+      $('#c1').hide();
+      $('#c2').hide();
+      $('#c3').show();
+      $('#c4').hide();
+      $('#c5').hide();
+      $('#c6').hide();
     });
-    document.getElementById("b4").addEventListener("click",function(){
-      var content1 = document.getElementById("c4");
-      var content2 = document.getElementById("c1");
-      var content3 = document.getElementById("c2");
-      var content4 = document.getElementById("c3");
-      var content5 = document.getElementById("c5");
-      var content6 = document.getElementById("c6");
-      if(content1.style.display=="none"){
-        content1.style.display="block";
-        content2.style.display="none";
-        content3.style.display="none";
-        content4.style.display="none";
-        content5.style.display="none";
-        content6.style.display="none";
-      }else{
-        content1.style.display="none";
-      }
+    $('#b4').click(function () {
+      $('#c1').hide();
+      $('#c2').hide();
+      $('#c3').hide();
+      $('#c4').show();
+      $('#c5').hide();
+      $('#c6').hide();
     });
-    document.getElementById("b5").addEventListener("click",function(){
-      var content1 = document.getElementById("c5");
-      var content2 = document.getElementById("c1");
-      var content3 = document.getElementById("c2");
-      var content4 = document.getElementById("c3");
-      var content5 = document.getElementById("c4");
-      var content6 = document.getElementById("c6");
-      if(content1.style.display=="none"){
-        content1.style.display="block";
-        content2.style.display="none";
-        content3.style.display="none";
-        content4.style.display="none";
-        content5.style.display="none";
-        content6.style.display="none";
-      }else{
-        content1.style.display="none";
-      }
+    $('#b5').click(function () {
+      $('#c1').hide();
+      $('#c2').hide();
+      $('#c3').hide();
+      $('#c4').hide();
+      $('#c5').show();
+      $('#c6').hide();
+      $('#c5').css('display', 'block');
     });
-    document.getElementById("b6").addEventListener("click",function(){
-      var content1 = document.getElementById("c6");
-      var content2 = document.getElementById("c1");
-      var content3 = document.getElementById("c2");
-      var content4 = document.getElementById("c3");
-      var content5 = document.getElementById("c4");
-      var content6 = document.getElementById("c5");
-      if(content1.style.display=="none"){
-        content1.style.display="block";
-        content2.style.display="none";
-        content3.style.display="none";
-        content4.style.display="none";
-        content5.style.display="none";
-        content6.style.display="none";
-      }else{
-        content1.style.display="none";
+    $('#b6').click(function () {
+      $('#c1').hide();
+      $('#c2').hide();
+      $('#c3').hide();
+      $('#c4').hide();
+      $('#c5').hide();
+      $('#c6').show();
+    });
+
+    $('#tabs a').click(function () {
+      $("#tabs a").removeClass("active");
+      $(this).addClass("active");
+    });
+
+    $('#batch1').click(function () {
+      $('#batches_wrapper').hide();
+      $('#batch_heading').hide();
+      $('#assignment_main').show();
+      $('#back_heading').click(function () {
+        $('#batches_wrapper').show();
+        $('#batch_heading').show();
+        $('#assignment_main').hide();
+      });
+    });
+
+  </script>
+
+  <script type="text/javascript">
+    function toggle() {
+      var blur = document.getElementById('blur');
+      blur.classList.toggle('active');
+      var popup = document.getElementById('popupForm');
+      popup.classList.toggle('active');
+    }  
+  </script>
+  <script>
+    $(function () {
+      $('a#logout').click(function () {
+        if (confirm('Are you sure to logout')) {
+          return true;
+        }
+
+        return false;
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $(".hamburger").click(function () {
+        $(".wrapper").toggleClass("collapse");
+      });
+      $(".profile .icon_wrap").click(function () {
+        $(this).parent().toggleClass("active");
+        $(".notifications").removeClass("active");
+
+      });
+      $(".notifications .icon_wrap").click(function () {
+        $(this).parent().toggleClass("active");
+        $(".profile").removeClass("active");
+
+      });
+      $(".link").click(function () {
+        $(".notifications").removeClass("active");
+        $(".popup").addClass("active");
+      });
+      $(".close").click(function () {
+        $(".popup").removeClass("active");
+      });
+
+      $('body').click(function () {
+        $(".popupForm").removeClass("active");
+        $(".profile").removeClass("active");
+        $(".notifications").removeClass("active");
+      });
+
+      $('.popupForm').click(function (e) {
+        e.stopPropagation();
+      });
+      $('.profile').click(function (e) {
+        e.stopPropagation();
+      });
+      $('.notifications').click(function (e) {
+        e.stopPropagation();
+      });
+      if ($(window).width() <= 1060) {
+        $(".wrapper").toggleClass("collapse");
       }
     });
   </script>
-
-    <script type="text/javascript">
-      function toggle() {
-        var blur = document.getElementById('blur');
-        blur.classList.toggle('active');
-        var popup = document.getElementById('popupForm');
-        popup.classList.toggle('active');
-      }  
-    </script>
-    <script>
-      $(function(){
-        $('a#logout').click(function(){
-            if(confirm('Are you sure to logout')) {
-                return true;
-            }
-
-            return false;
-        });
-      });
-    </script>
-    <script>
-      $(document).ready(function(){
-        $(".hamburger").click(function(){
-           $(".wrapper").toggleClass("collapse");
-        });
-        $(".profile .icon_wrap").click(function(){
-          $(this).parent().toggleClass("active");
-          $(".notifications").removeClass("active");
-          // if(!($(".wrapper").hasClass("collapse"))){
-          //   if($(window).width() <= 1060){
-          //     $(".wrapper").toggleClass("collapse");
-          //   }
-          // }
-        });
-        $(".notifications .icon_wrap").click(function(){
-          $(this).parent().toggleClass("active");
-          $(".profile").removeClass("active");
-          // if(!($(".wrapper").hasClass("collapse"))){
-          //   if($(window).width() <= 1060){
-          //     $(".wrapper").toggleClass("collapse");
-          //   }
-          // }
-        });
-        $(".link").click(function() {
-          $(".notifications").removeClass("active");
-          $(".popup").addClass("active");
-        });
-        $(".close").click(function(){
-          $(".popup").removeClass("active");
-        });
-        // $("body").click(function() {
-        //   if (!$(this.target).is('.notifications')) {
-        //     $(".notifications").removeClass("active");
-        //   }
-        //   else if (!$(this.target).is('.profile')) {
-        //     $(".profile").removeClass("active");
-        //   }
-        // }
-        $('body').click(function() {
-            $(".popupForm").removeClass("active");
-            $(".profile").removeClass("active");
-            $(".notifications").removeClass("active");
-        });
-
-        $('.popupForm').click(function(e) {
-            e.stopPropagation();
-        });
-        $('.profile').click(function(e) {
-            e.stopPropagation();
-        });
-        $('.notifications').click(function(e) {
-            e.stopPropagation();
-        });
-        if($(window).width() <= 1060){
-          $(".wrapper").toggleClass("collapse");
-        }
-      });
-      $('#b6').click(function(){
-          $('.wrapper').toggleClass("collapse");
-          isCollapsed = true;
-        });
-    </script>
 </body>
+
 </html>

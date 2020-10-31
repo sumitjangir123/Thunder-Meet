@@ -65,3 +65,12 @@ module.exports.policies= async function(req,res){
         console.log(error);
     }
 }
+
+
+
+module.exports.siteMap= async function(req,res){
+
+        return res.render('sitemap',{
+            title:"Thunder-Meet"
+        })
+}

@@ -21,8 +21,7 @@ const friendshipSchema = new mongoose.Schema({
     },
     localLinks:{
         type:String
-    },
-    createdAt: { type: Date, expires: '2880m', default: Date.now }
+    }
 },{
     timestamps: true
 });

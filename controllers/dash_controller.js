@@ -14,6 +14,7 @@ const User = require("../models/user");
 const Org = require("../models/organization");
 const Friends = require("../models/friendship");
 const crypto = require("crypto");
+const Attendance = require("../models/attendance");
 
 module.exports.student = async function (req, res) {
 
@@ -26,9 +27,17 @@ module.exports.student = async function (req, res) {
         year: req.user.year
     }).sort('-createdAt');
 
+    let attend = await Attendance.find({
+        student: req.user.name,
+        branch : req.user.branch,
+        year : req.user.year
+    }).populate("teacher")
+
+    console.log(attend);
     return res.render('student_dashboard', {
         title: "student section",
-        links: classes
+        links: classes,
+        attend: attend
     })
 }
 
@@ -48,7 +57,7 @@ module.exports.teacher = async function (req, res) {
 
 
     //fetching class info
-    let classes = await Friends.find({moderator:req.user.email}).sort('-createdAt');
+    let classes = await Friends.find({moderator:req.user.email}).sort('-createdAt').sort('-createdAt');
 
     if (org.length != 0) {
 
@@ -168,14 +177,14 @@ module.exports.createClass = async function (req, res) {
     });
 
     events = result.data.items;
+
+        console.log(events);
     if (events.length) {
-        req.flash("error", "Sorry, Students Are Busy With " + events[0].summary + " | According to the user " + users[0].email);
+        req.flash("error", "Sorry, Students Are Busy With " + events[0].summary + " | will end at "+ ((events[0].end.dateTime).split("T")[1]).split("+")[0]  +" | According to the user " + users[0].email);
         return res.redirect("back");
     }
 
     //checking end for students
-
-
 
 
     //update teacher's class info
