@@ -22,7 +22,7 @@ const { json } = require('express');
 passport.use(new googleStrategy({
   clientID: "656640366395-5tcdds420ghq7195tfsbi04i7rduaans.apps.googleusercontent.com",
   clientSecret: "hFTuBGp0WALLex6g9eh2mrCZ",
-  callbackURL: "http://localhost:8000/users/auth/google/callback"
+  callbackURL: "https://thundermeet.ml/users/auth/google/callback"
 },
   function (accessToken, refreshToken, requestParams, profile, cb) {
     //find a user 

@@ -11,13 +11,84 @@
 
    <link rel="stylesheet" href="/css/main.css" />
 
+
+   <style>
+      /* Popup container - can be anything you want */
+      .popup {
+         position: relative;
+         display: inline-block;
+         cursor: pointer;
+         -webkit-user-select: none;
+         -moz-user-select: none;
+         -ms-user-select: none;
+         user-select: none;
+      }
+
+      /* The actual popup */
+      .popup .popuptext {
+         visibility: hidden;
+         width: 240px;
+         background-color: white;
+         color: #fff;
+         text-align: center;
+         border-radius: 6px;
+         padding: 10px;
+         position: absolute;
+         z-index: 1;
+         bottom: 125%;
+         left: 40%;
+         margin-left: -80px;
+      }
+
+      /* Popup arrow */
+      .popup .popuptext::after {
+         content: "";
+         position: absolute;
+         top: 100%;
+         left: 50%;
+         margin-left: -5px;
+         border-width: 5px;
+         border-style: solid;
+         border-color: #555 transparent transparent transparent;
+      }
+
+      /* Toggle this class - hide and show the popup */
+      .popup .show {
+         visibility: visible;
+         -webkit-animation: fadeIn 1s;
+         animation: fadeIn 1s;
+      }
+
+      /* Add animation (fade in the popup) */
+      @-webkit-keyframes fadeIn {
+         from {
+            opacity: 0;
+         }
+
+         to {
+            opacity: 1;
+         }
+      }
+
+      @keyframes fadeIn {
+         from {
+            opacity: 0;
+         }
+
+         to {
+            opacity: 1;
+         }
+      }
+   </style>
+
+
 </head>
 
 <body onscroll="myFunction()">
 
    <!-- Top Navbar begins-->
 
-   <nav class="navigation" >
+   <nav class="navigation">
       <div class="content">
          <div class="tm-title animated faster tada"><img style="height: 50px; padding: 10px;" alt="logo"
                src="<%=assetPath("images/logo.svg")%>"></div>
@@ -29,6 +100,7 @@
                <li><a href="#about-us">Need</a></li>
                <li><a href="#founders">Founders</a></li>
                <li><a href="#end">Contact Us</a></li>
+               <li><a href="/privacyPolicies">Privacy Policies</a></li>
 
 
                <%if(locals.user && locals.user.access=="student"){%>
@@ -138,7 +210,25 @@
                   <p>Sick of hearing about the privacy issues of ZOOM? Or did you get tired of looking into your time table for every class? Worried that unwanted people might join your Google meeting?
                   <br>Don't worry! Thunder Meet got everything covered.
                   </p>
-                  <button class="btn"> Learn more </button>
+
+                  <div class="btn popup" onclick="myFunction()" style="background-color: #683aa4; color: white;">Explore Features
+                     <span class="popuptext" id="myPopup">
+                        <p style="font-weight: 100; font-family: sans-serif; font-size: 13px; text-transform: lowercase;">
+                        <b style="color:#683aa4;">For the teacher's Guest Account use</b>
+                        <br>
+                        Email: kumarsumit16022000@gmail.com
+                        <br>
+                        password : 12345678
+                        <br>
+                        <b style="color:  #683aa4;">For the students's Guest Account use</b>
+                        <br>
+                        Email: 2018kucp1042@iiitkota.ac.in
+                        <br>
+                        password : 12345678
+   
+                     </p></span>
+                   </div>
+                  
                </div>
                <div class="col img-col">
                   <img src="images/main_image.svg" alt="main-image" class="image-fluid"> 
@@ -194,8 +284,8 @@
            <div class="carousel-item active" data-interval="10000">
              <img src="<%=assetPath("images/3-min.png")%>" class="d-block w-100" alt="Snapshot 1" />
                <div class="carousel-caption d-none d-md-block" style="color: black;">
-                 
-                  
+
+
                   <p>You have access to your assignments. You can raise doubts. You can report a problem. You are our
                      priority.</p>
                </div>
@@ -209,7 +299,7 @@
          </div>
          <div class="carousel-item" data-interval="10000">
             <img src="<%=assetPath("images/2-min.png")%>" class="d-block w-100" alt="Snapshot 3" />
-            <div class="carousel-caption d-none d-md-block" >
+            <div class="carousel-caption d-none d-md-block">
                <p style="color: white;">We have a ton of features to help you out. Keep scrolling.</p>
             </div>
          </div>
@@ -243,7 +333,7 @@
                      Thunder Meet.
                      <br>Don't worry! Thunder Meet got everything covered.
                   </p>
-                  <a href="organizations/register"><button class="btn btn-lg">Join Us</button></a>
+                  <a href="organizations/register"><button class="btn pl-4 pr-4">Join Us</button></a>
 
                </div>
             </div>
@@ -390,6 +480,13 @@
 
       <script src="<%=assetPath("js/stackpathbootstrap.js")%>"> </script>
 
+      <script>
+         // When the user clicks on div, open the popup
+         function myFunction() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+         }
+      </script>
 
 
 </body>
